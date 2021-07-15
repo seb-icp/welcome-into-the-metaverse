@@ -1,5 +1,6 @@
-
 import Phaser from "phaser";
+
+import { createCharacterAnims } from "../anims/character";
 
 export default class Preloader extends Phaser.Scene {
 
@@ -27,55 +28,50 @@ export default class Preloader extends Phaser.Scene {
     }
 
     create() {
+
+        // Create anims 
+
+        createCharacterAnims(this.anims)
         //Create and display the map
         const map = this.make.tilemap({ key : 'city' })
         const tileset = map.addTilesetImage('tilemap_packed', 'tiles')
         map.createLayer('ground', tileset)
+        const objectLayer = map.createLayer('object', tileset)
+        const otherLayer =  map.createLayer('uplayer', tileset)
+    
 
-        //Sound 
-        // const backgroundSound = this.sound.add('inTheCity')
-        // backgroundSound.play()
+        objectLayer.setCollisionByProperty({collide:true})
+        otherLayer.setCollisionByProperty({collide:true})
 
-        //
+        // const debugGraphics = this.add.graphics().setAlpha(0.7)
+        // objectLayer.renderDebug(debugGraphics, {
+        //     tileColor:null,
+        //     collidingTileColor:  new Phaser.Display.Color(243,234,48,255),
+        //     faceColor: new Phaser.Display.Color(40,39,37,255)
+        // })
+        // otherLayer.renderDebug(debugGraphics, {
+        //     tileColor:null,
+        //     collidingTileColor:  new Phaser.Display.Color(243,234,48,255),
+        //     faceColor: new Phaser.Display.Color(40,39,37,255)
+        // })
+
+
+        //Sounds
+       
+        const backgroundSound = this.sound.add('inTheCity')
+        backgroundSound.play()
+
+        
 
         this.character = this.physics.add.sprite(200,200, 'character' , 'character/up.png')
 
-        this.anims.create({
-            key:'character_idle',
-            frames: [{key : 'character' , frame: 'character/down.png' }]
-        })
-
-        
-        this.anims.create({
-            key:'character_walk_down',
-            frames: this.anims.generateFrameNames('character', {start:1, end:2 , prefix: 'character/walk_down', suffix: '.png'}),
-            repeat : -1,
-            frameRate : 5
-        })
-        this.anims.create({
-            key:'character_walk_up',
-            frames: this.anims.generateFrameNames('character', {start:1, end:2 , prefix: 'character/walk_up', suffix: '.png'}),
-            repeat : -1,
-            frameRate : 5
-        })
-        this.anims.create({
-            key:'character_walk_right',
-            frames: this.anims.generateFrameNames('character', {start:1, end:2 , prefix: 'character/walk_right', suffix: '.png'}),
-            repeat : -1,
-            frameRate : 5
-        })
-        this.anims.create({
-            key:'character_walk_left',
-            frames: this.anims.generateFrameNames('character', {start:1, end:2 , prefix: 'character/walk_left', suffix: '.png'}),
-            repeat : -1,
-            frameRate : 5
-        })
 
 
 
 
-        this.character.anims.play('character_idle')
-        this.character.anims.play('character_walk_left')
+        this.physics.add.collider(this.character, objectLayer)
+        this.physics.add.collider(this.character,otherLayer )
+        this.character.setCollideWorldBounds(true); //Prevent the character from moving out of the screen 
         
     }
 
@@ -104,10 +100,11 @@ export default class Preloader extends Phaser.Scene {
         }
 
         else if (this.cursors.down?.isDown) {
-            this.character.anims.play('character_walk_left', true)
+            this.character.anims.play('character_walk_down', true)
             this.character.setVelocity(0,speed)
         }
         else {
+            this.character.anims.play('character_idle',true)
             this.character.setVelocity(0,0)
         }
     }

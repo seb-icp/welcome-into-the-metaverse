@@ -15,7 +15,8 @@ const config =  {
   },
   scene : [Preloader],
   scale : {
-      zoom: 2
+      zoom: 2,
+      debug : true
   },
   pixelArt: true //Test later 
 }
