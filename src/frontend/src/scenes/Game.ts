@@ -6,10 +6,13 @@ export default class Game extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('logo', "./Banner.png")
+        
     }
 
     create () {
-        this.add.image(400,300,'logo')
+       
+        this.add.image(200,200,'character')
+
+
     }
 }
