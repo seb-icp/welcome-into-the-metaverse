@@ -10,15 +10,17 @@ const config =  {
   physics: {
       default: 'arcade',
       arcade : {
-          gravity : {y : 0}
+          gravity : {y : 0},
+          debug : true
       }
   },
   scene : [Preloader],
   scale : {
       zoom: 2,
-      debug : true
+      
   },
-  pixelArt: true //Test later 
+  pixelArt: true,
+
 }
 
 export default new Phaser.Game(config)

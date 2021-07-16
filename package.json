@@ -15,6 +15,7 @@
   "dependencies": {
     "@dfinity/agent": "0.8.7",
     "@dfinity/authentication": "0.8.7",
-    "phaser": "^3.55.2"
+    "phaser": "^3.55.2",
+    "short-uuid": "^4.2.0"
   }
 }

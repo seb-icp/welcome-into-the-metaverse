@@ -12,7 +12,6 @@ export default class Game extends Phaser.Scene {
     create () {
        
         this.add.image(200,200,'character')
-
-
+        
     }
 }
