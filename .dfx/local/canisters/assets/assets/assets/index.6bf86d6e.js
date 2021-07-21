@@ -1,1 +1,0 @@
-import{P as e}from"./vendor.c2cc9365.js";class a extends e.Scene{constructor(){super("game")}preload(){this.load.image("logo","./Banner.png")}create(){this.add.image(400,300,"logo")}}const c={type:e.AUTO,width:800,height:500,physics:{default:"arcade",arcade:{gravity:{y:0}}},scene:[a],scale:{zoom:2}};new e.Game(c);

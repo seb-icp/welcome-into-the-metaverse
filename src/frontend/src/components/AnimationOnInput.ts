@@ -7,19 +7,19 @@ export default class AnimationOnInput implements IComponent {
 
     private gameObject! : Phaser.GameObjects.Sprite
     private readonly cursors : Phaser.Types.Input.Keyboard.CursorKeys
-    private anims : Phaser.Animations.AnimationManager
-    private dir : Phaser.Animations.Animation
+   
+    private dir! : Phaser.Animations.Animation
 
-    constructor(cursors : Phaser.Types.Input.Keyboard.CursorKeys, anims : Phaser.Animations.AnimationManager) {
+    constructor(cursors : Phaser.Types.Input.Keyboard.CursorKeys) {
         this.cursors = cursors
-        this.anims = anims
+        
     }
 
     init(go : Phaser.GameObjects.GameObject) {
         this.gameObject = go as Phaser.GameObjects.Sprite
     }
 
-    update (dt : number) {
+    update () {
 
         if (this.cursors.left.isDown) {
             this.gameObject.play('left',true)

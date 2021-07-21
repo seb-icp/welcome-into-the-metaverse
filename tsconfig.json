@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES2015",
     "lib": [
       "ESNext",
       "DOM",
@@ -24,10 +24,14 @@
     "paths": {
       "dfx-generated/counter": [
         ".dfx/local/canisters/counter/counter.js",
-      ]
+      ],
+      "dfx-generated/multiverse" : [
+        ".dfx/local/canisters/multiverse/multiverse.js"
+      ],
+
     }
   },
   "include": [
     "./src"
-  ]
+, ".dfx/online/multiverseOnline", "public/multiverse"  ]
 }

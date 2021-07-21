@@ -16,7 +16,7 @@ export default  class KeyboardMovement implements IComponent  {
         this.gameObject = go as Phaser.Physics.Arcade.Sprite
     }
 
-    update (dt: number) {
+    update () {
         
         if (this.cursors.left.isDown)
 		{

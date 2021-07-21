@@ -13,9 +13,11 @@
     "vite": "^2.3.2"
   },
   "dependencies": {
-    "@dfinity/agent": "0.8.7",
+    "@dfinity/agent": "0.8.8",
+    "@dfinity/auth-client": "^0.9.1",
     "@dfinity/authentication": "0.8.7",
     "phaser": "^3.55.2",
+    "phaser3-rex-plugins": "^1.1.57",
     "short-uuid": "^4.2.0"
   }
 }

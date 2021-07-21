@@ -4,18 +4,23 @@ import { createCharacterAnims } from "../anims/MainCharacter";
 import ComponentService from "../services/ComponentService";
 import KeyboardMovement from "../components/KeyboardMovements";
 import AnimationOnInput from "../components/AnimationOnInput";
+import SelectionCursor from "../components/SelectionCursor";
+import People from "../components/People";
+
+
+
 
 
 export default class Preloader extends Phaser.Scene {
 
+   
     private components! : ComponentService
     private cursors!: Phaser.Types.Input.Keyboard.CursorKeys
-
-    // private character! : Phaser.Physics.Arcade.Sprite
+    
+    
     private character2! : Phaser.Physics.Arcade.Sprite
-    private jordan! : Phaser.Physics.Arcade.Sprite
-    private hazel! : Phaser.Physics.Arcade.Sprite
     private santa! : Phaser.Physics.Arcade.Sprite
+
     
     constructor() {
         super('preloader')
@@ -30,26 +35,44 @@ export default class Preloader extends Phaser.Scene {
     } 
 
     preload() {
+        
+        
+        //Spritesheet for all characters 
+        
+        //Special characters :
+        this.load.spritesheet('santa', './pnj/santa.png', {frameWidth:48, frameHeight : 32})
+        this.load.spritesheet('character2', './character/Alex_run_16x16.png',{frameWidth:16, frameHeight : 32});
+
+        //Characters coming from the multiverse 
+        this.load.spritesheet('avatar1', './character/avatar1.png',{frameWidth:16, frameHeight : 32});
+        this.load.spritesheet('avatar2', './character/avatar2.png' , {frameWidth:16, frameHeight : 32})
+        this.load.spritesheet('avatar3', './character/avatar3.png', {frameWidth:16, frameHeight : 32})
+        this.load.spritesheet('avatar4', './character/avatar4.png', {frameWidth:16, frameHeight : 32})
+        this.load.spritesheet('avatar5', './character/avatar5.png' , {frameWidth:16, frameHeight : 32})
+        this.load.spritesheet('avatar6', './character/avatar6.png', {frameWidth:16, frameHeight : 32})
+        this.load.spritesheet('avatar7', './character/avatar7.png',{frameWidth:16, frameHeight : 32});
+        this.load.spritesheet('avatar8', './character/avatar8.png', {frameWidth:16, frameHeight : 32})
+        this.load.spritesheet('avata9', './character/avatar9.png' , {frameWidth:16, frameHeight : 32})
+        this.load.spritesheet('avatar10', './character/avatar10.png', {frameWidth:16, frameHeight : 32})
+    
 
         // Load the map
 
         this.load.image('tiles', './map/tilemap_packed.png')
         this.load.tilemapTiledJSON('city', './map/city.json')
 
+        
         //Load audio
 
         this.load.audio('inTheCity', './audio/in-the-city.mp3')
 
 
-        //Spritesheet for all anims
-        this.load.spritesheet('character2', './character/Alex_run_16x16.png',{frameWidth:16, frameHeight : 32});
-        this.load.spritesheet('santa', './pnj/santa.png', {frameWidth:48, frameHeight : 32})
-        this.load.spritesheet('hazel', './pnj/hazel.png' , {frameWidth:16, frameHeight : 32})
-        this.load.spritesheet('jordan', './pnj/jordan.png', {frameWidth:16, frameHeight : 32})
-
+       
     }
 
     create() {
+        
+        
     
          //Create and display the map
          const map = this.make.tilemap({ key : 'city' })
@@ -90,7 +113,17 @@ export default class Preloader extends Phaser.Scene {
         //Add components 
 
         this.components.addComponent(this.character2, new KeyboardMovement(this.cursors)) //Allow the character to move
-        this.components.addComponent(this.character2, new AnimationOnInput (this.cursors, this.anims))
+        this.components.addComponent(this.character2, new AnimationOnInput (this.cursors))
+        this.components.addComponent(this.character2, new SelectionCursor (this.cursors, this.jordan))
+
+
+        // Add people (??)
+
+        
+        this.components.addComponent(this.jordan, new People("Jordan Last", "I'm hard at work, building Sudograph!"))
+        
+
+       
 
         //Add colliders 
 
@@ -130,8 +163,8 @@ export default class Preloader extends Phaser.Scene {
     
         //Sounds
        
-        const backgroundSound = this.sound.add('inTheCity')
-        backgroundSound.play()
+        // const backgroundSound = this.sound.add('inTheCity')
+        // backgroundSound.play()
         
         //Debug functionality
 
@@ -146,14 +179,36 @@ export default class Preloader extends Phaser.Scene {
             collidingTileColor:  new Phaser.Display.Color(243,234,48,255),
             faceColor: new Phaser.Display.Color(40,39,37,255)
         })
+
+       
+
+        // this.components.addComponent(this.character2, new Dialog("hello"))
+
         
-    }
+
+    
+        
 
 
-    update (t : number , dt:number) {
+       
 
+        
+
+
+    
+
+
+}
+       
+
+    
+
+
+    update (_t : number, dt:number) {
+        
         this.components.update(dt) // Part of the component specification
+        
 
-
+    
     }
 }
