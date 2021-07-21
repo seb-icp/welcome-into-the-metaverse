@@ -5,8 +5,6 @@ export default class DialogTry {
 
     private gameObject : Phaser.GameObjects.GameObject
 
-    
-
     private readonly borderThickness : number
     private readonly borderColor : number
     private readonly borderAlpha : number

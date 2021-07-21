@@ -1,7 +1,6 @@
 import type { Principal } from '@dfinity/agent';
 import { Actor,HttpAgent } from "@dfinity/agent";
-
-
+import People from "./components/People"
 import {idlFactory as multiverse_idl , canisterId as multiverse_id} from "./multiverse.js"
 
 type Character = Character_2;
@@ -23,21 +22,19 @@ const getData = async () =>  {
     const dataShuffled = data.sort(() => 0.5 - Math.random())
     selectedCharacters = dataShuffled.slice(0,9)
     console.log(selectedCharacters)
+    let peoples : People[] = []
+    selectedCharacters.forEach( (character) => {
+    let newPeople : People = new People(character[1].name , character[1].message, Number(character[1].avatar))
+    peoples.push(newPeople)
+    console.log(peoples)
+});
+    return peoples
 }
 
-getData()
+export {getData}
 
 
-const populateScene = (scene : Phaser.Scene , data : Array<[Principal,Character]> , position : Array<[x : number , y : number]>) => {
 
-    _loadAssets(scene : Phaser.Scene) 
-
-}
-
-
-const _loadAssets = (scene : Phaser.Scene) => {
-    scene.load
-}
 
 
 

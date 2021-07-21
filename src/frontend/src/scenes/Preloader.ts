@@ -5,7 +5,6 @@ import ComponentService from "../services/ComponentService";
 import KeyboardMovement from "../components/KeyboardMovements";
 import AnimationOnInput from "../components/AnimationOnInput";
 import SelectionCursor from "../components/SelectionCursor";
-import People from "../components/People";
 
 
 
@@ -16,10 +15,9 @@ export default class Preloader extends Phaser.Scene {
    
     private components! : ComponentService
     private cursors!: Phaser.Types.Input.Keyboard.CursorKeys
-    
-    
     private character2! : Phaser.Physics.Arcade.Sprite
     private santa! : Phaser.Physics.Arcade.Sprite
+
 
     
     constructor() {
@@ -34,13 +32,15 @@ export default class Preloader extends Phaser.Scene {
         })
     } 
 
+
     preload() {
+        
         
         
         //Spritesheet for all characters 
         
         //Special characters :
-        this.load.spritesheet('santa', './pnj/santa.png', {frameWidth:48, frameHeight : 32})
+        this.load.spritesheet('santa', './character/santa.png', {frameWidth:48, frameHeight : 32})
         this.load.spritesheet('character2', './character/Alex_run_16x16.png',{frameWidth:16, frameHeight : 32});
 
         //Characters coming from the multiverse 
@@ -65,8 +65,6 @@ export default class Preloader extends Phaser.Scene {
         //Load audio
 
         this.load.audio('inTheCity', './audio/in-the-city.mp3')
-
-
        
     }
 
@@ -85,44 +83,40 @@ export default class Preloader extends Phaser.Scene {
         otherLayer.setCollisionByProperty({collide:true})
 
 
-        //Create player and characters 
+        //Add sprite to characters
 
         this.character2 = this.physics.add.sprite(100,100, 'character2')
         this.santa = this.physics.add.sprite(200,200,'santa',0)
-        this.hazel = this.physics.add.sprite(250,250,'hazel',0)
-        this.jordan = this.physics.add.sprite(300,300, 'jordan',0)
+        
+    
+
 
         this.character2.body.setSize(this.character2.width,25,true)
         this.character2.body.offset.y = 8;
         this.character2.setCollideWorldBounds(true); //Prevent the character from moving out of the screen 
 
-        this.jordan.body.setSize(this.character2.width,25,true)
-        this.jordan.body.offset.y = 8;
+        
 
-        this.hazel.body.setSize(this.character2.width,25,true)
-        this.hazel.body.offset.y = 8;
+        //Few improvements regarding the collide body 
 
         this.santa.body.setSize(35,25,true)
         this.santa.body.offset.x = -4
         this.santa.body.offset.y = 8;
 
-        this.jordan.setImmovable();
-        this.hazel.setImmovable();
+        
         this.santa.setImmovable();
 
         //Add components 
 
         this.components.addComponent(this.character2, new KeyboardMovement(this.cursors)) //Allow the character to move
         this.components.addComponent(this.character2, new AnimationOnInput (this.cursors))
-        this.components.addComponent(this.character2, new SelectionCursor (this.cursors, this.jordan))
+        this.components.addComponent(this.character2, new SelectionCursor (this.cursors, this.santa))
 
 
         // Add people (??)
 
         
-        this.components.addComponent(this.jordan, new People("Jordan Last", "I'm hard at work, building Sudograph!"))
-        
-
+       
        
 
         //Add colliders 
@@ -130,8 +124,6 @@ export default class Preloader extends Phaser.Scene {
 
         this.physics.add.collider(this.character2, objectLayer)
         this.physics.add.collider(this.character2,otherLayer )
-        this.physics.add.collider(this.character2, this.jordan)
-        this.physics.add.collider(this.character2, this.hazel)
         this.physics.add.collider(this.character2, this.santa)
 
     
@@ -147,17 +139,12 @@ export default class Preloader extends Phaser.Scene {
             repeat: -1,
             frameRate:5
         })
-        this.anims.create({
-            key:'jordan',
-            frames: this.anims.generateFrameNames('jordan', {start:0, end:17}),
-            repeat: -1,
-            frameRate:5
-        })
+    
 
 
         //Play anims
 
-        this.jordan.play('jordan')
+    
         this.santa.play('santa')
 
     

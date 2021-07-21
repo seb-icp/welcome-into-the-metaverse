@@ -1,7 +1,6 @@
 import Phaser from "phaser";
-
-//Scenes
 import Preloader from "./scenes/Preloader"
+import Prepeloader from "./scenes/Prepeloader";
 
 
 const config =  {
@@ -19,15 +18,14 @@ const config =  {
           debug : true
       }
   },
-  scene : [Preloader],
+  scene : [Prepeloader,Preloader],
   scale : {
       zoom: 2,
       
   },
   pixelArt: true,
+
  
 }
 
 export default new Phaser.Game(config)
-
-// 

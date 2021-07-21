@@ -1,5 +1,5 @@
 import { IComponent } from "../services/ComponentService";
-
+//Will be used to store data
 
 export default class People implements IComponent {
 
@@ -9,21 +9,15 @@ export default class People implements IComponent {
     readonly avatarNumber : number
 
     gameObject! : Phaser.GameObjects.GameObject
-    private readonly scene : Phaser.Scene
-    constructor(name: string, message : string, avatarNumber : number, scene : Phaser.Scene) {
+
+    constructor(name: string, message : string, avatarNumber : number ) {
         this.name = name 
         this.message = message
         this.avatarNumber = avatarNumber
-        this.scene = scene
     }
 
     init (go: Phaser.GameObjects.GameObject) {
         this.gameObject = go //Probably the main character
     }
 
-
-
-    _loadAssets = () => {
-        this.scene.load.spritesheet(`avatar${this.avatarNumber}`, './character/avatar1.png'
-    }
 }

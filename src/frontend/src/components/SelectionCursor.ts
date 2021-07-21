@@ -4,7 +4,7 @@ import Phaser from "phaser";
 import {IComponent, IComponentsService} from "../services/ComponentService"
 
 import People from "./People";
-import DialogTry from "../plugin/dialogtry";
+import DialogTry from "../plugin/DialogTry";
 
 
 export default class SelectionCursor implements IComponent {
@@ -18,9 +18,6 @@ export default class SelectionCursor implements IComponent {
     private components !: IComponentsService 
 
     private selectedPeople? : People
-
-
-
 
     constructor(cursors : Phaser.Types.Input.Keyboard.CursorKeys, people : Phaser.Physics.Arcade.Sprite,  distance = 24) {
         this.cursors = cursors
