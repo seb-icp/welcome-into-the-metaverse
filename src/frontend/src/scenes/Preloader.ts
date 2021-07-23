@@ -1,14 +1,15 @@
 import Phaser from "phaser";
 
 import { createCharacterAnims } from "../anims/MainCharacter";
+import { createAvatarAnims } from "../anims/OtherCharacter";
+
 import ComponentService from "../services/ComponentService";
 import KeyboardMovement from "../components/KeyboardMovements";
 import AnimationOnInput from "../components/AnimationOnInput";
 import SelectionCursor from "../components/SelectionCursor";
+import DataPeople from "../components/DataPeople";
 
-
-
-
+import DialogBox from "../components/DialogBox";
 
 export default class Preloader extends Phaser.Scene {
 
@@ -18,7 +19,11 @@ export default class Preloader extends Phaser.Scene {
     private character2! : Phaser.Physics.Arcade.Sprite
     private santa! : Phaser.Physics.Arcade.Sprite
 
+    private dialogBox : DialogBox | undefined
+   
 
+    private characters : Phaser.Physics.Arcade.Sprite[] = []
+    
     
     constructor() {
         super('preloader')
@@ -34,41 +39,16 @@ export default class Preloader extends Phaser.Scene {
 
 
     preload() {
+        console.log("Preload preload starts")
         
-        
-        
-        //Spritesheet for all characters 
-        
-        //Special characters :
-        this.load.spritesheet('santa', './character/santa.png', {frameWidth:48, frameHeight : 32})
-        this.load.spritesheet('character2', './character/Alex_run_16x16.png',{frameWidth:16, frameHeight : 32});
-
-        //Characters coming from the multiverse 
-        this.load.spritesheet('avatar1', './character/avatar1.png',{frameWidth:16, frameHeight : 32});
-        this.load.spritesheet('avatar2', './character/avatar2.png' , {frameWidth:16, frameHeight : 32})
-        this.load.spritesheet('avatar3', './character/avatar3.png', {frameWidth:16, frameHeight : 32})
-        this.load.spritesheet('avatar4', './character/avatar4.png', {frameWidth:16, frameHeight : 32})
-        this.load.spritesheet('avatar5', './character/avatar5.png' , {frameWidth:16, frameHeight : 32})
-        this.load.spritesheet('avatar6', './character/avatar6.png', {frameWidth:16, frameHeight : 32})
-        this.load.spritesheet('avatar7', './character/avatar7.png',{frameWidth:16, frameHeight : 32});
-        this.load.spritesheet('avatar8', './character/avatar8.png', {frameWidth:16, frameHeight : 32})
-        this.load.spritesheet('avata9', './character/avatar9.png' , {frameWidth:16, frameHeight : 32})
-        this.load.spritesheet('avatar10', './character/avatar10.png', {frameWidth:16, frameHeight : 32})
-    
-
-        // Load the map
-
-        this.load.image('tiles', './map/tilemap_packed.png')
-        this.load.tilemapTiledJSON('city', './map/city.json')
+        //Get data from custom cache
 
         
-        //Load audio
-
-        this.load.audio('inTheCity', './audio/in-the-city.mp3')
        
     }
 
     create() {
+
         
         
     
@@ -85,14 +65,88 @@ export default class Preloader extends Phaser.Scene {
 
         //Add sprite to characters
 
+
         this.character2 = this.physics.add.sprite(100,100, 'character2')
-        this.santa = this.physics.add.sprite(200,200,'santa',0)
+       
+                
+        let peoples = [
+            {
+                "name": "dukes",
+                "message": "Hello. I am dukes. I am hungry. Where can I find some chips and guac in this Dfinity Metaverse? ",
+                "avatarNumber": 2
+            },
+            {
+                "name": "First10digits",
+                "message": "Follow me!",
+                "avatarNumber": 10
+            },
+            {
+                "name": "Howellikeawolf",
+                "message": "Do I really have to?",
+                "avatarNumber": 6
+            },
+            {
+                "name": "whizwang",
+                "message": "Roses are red, chai is tea, learn Motoko and build on the IC!",
+                "avatarNumber": 4
+            },
+            {
+                "name": "The Bob Blob",
+                "message": "Blub... Blurb... Blooooob...",
+                "avatarNumber": 10
+            },
+            {
+                "name": "lastmjs",
+                "message": "Greetings from the digital world",
+                "avatarNumber": 4
+            },
+            {
+                "name": "Chamfa",
+                "message": "Pairplay",
+                "avatarNumber": 10
+            },
+            {
+                "name": "Hazel",
+                "message": "Woah!",
+                "avatarNumber": 10
+            },
+            {
+                "name": "Jumbo",
+                "message": "The might Jumbo\nUndefeated ",
+                "avatarNumber": 9
+            },
+            {
+                "name": "Jingo McMuffin",
+                "message": "Felonious greetings from the ninth realm of Covfefedfgfdnkjlgfndskfgndsfkgfnd gndkfndslkgnzdslkfg ndsklgndflkhnfdklgnfdklgnfdklg ndfklgnfdklgnfdklg ndfkgnd fklgndfkgnd fsfsdfsd sdgfsdfsdfds  fdsf sdf ffsdf dsf sd",
+                "avatarNumber": 1
+            }
+        ]
+
+        // let peoples = this.game.cache.custom.customCache.get('characters') as DataPeople[]
+        const randomPosition : [x : number , y : number][] = [[320,100],[300,250],[200,55],[150,50],[150,280],[20,54],[20,50],[20,50],[20,50],[20,50]]
+        console.log('peoples', peoples)
+
+        for (let i = 0 ; i<10 ; i++) {
+
+            let avatarNumber = peoples[i].avatarNumber
+            let avatar = `avatar${avatarNumber}`
+            this.characters[i] = this.physics.add.sprite(randomPosition[i][0] , randomPosition[i][1], avatar, 0)
+            console.log(this.characters[i])
+            this.components.addComponent(this.characters[i], new DataPeople(peoples[i].name, peoples[i].message, peoples[i].avatarNumber))
+            this.characters[i].body.setSize(15,25)
+            this.characters[i].body.offset.y = 8
+            this.physics.add.collider(this.character2, this.characters[i])
+            this.characters[i].setImmovable();
+            console.log("done")
+        }
+        this.santa = this.physics.add.sprite(110,235,'santa',0)
+       
+       
         
     
-
-
-        this.character2.body.setSize(this.character2.width,25,true)
-        this.character2.body.offset.y = 8;
+        this.character2.body.setSize(this.character2.width - 5,15,true)
+        
+        this.character2.body.offset.y = 15;
         this.character2.setCollideWorldBounds(true); //Prevent the character from moving out of the screen 
 
         
@@ -110,42 +164,43 @@ export default class Preloader extends Phaser.Scene {
 
         this.components.addComponent(this.character2, new KeyboardMovement(this.cursors)) //Allow the character to move
         this.components.addComponent(this.character2, new AnimationOnInput (this.cursors))
-        this.components.addComponent(this.character2, new SelectionCursor (this.cursors, this.santa))
 
-
-        // Add people (??)
-
+        const pnjs = this.physics.add.staticGroup()
+        pnjs.addMultiple(this.characters)
+        pnjs.add(this.santa)
+        console.log(pnjs.children)
         
-       
+        this.components.addComponent(this.character2, new DialogBox (this.character2))
+        this.dialogBox = this.components.findComponent(this.character2, DialogBox)
+        this.dialogBox!.createWindow()
+        this.dialogBox!._toggleWindow()
+        this.components.addComponent(this.character2, new SelectionCursor (this.cursors, pnjs , this.character2))
+        
+        this.components.addComponent(this.santa , new DataPeople("santa", 'hohoho!' , 18)) //We need to add a Data component if we want to interact with Santa because the Selection Cursor uses it ... 
        
 
         //Add colliders 
 
 
         this.physics.add.collider(this.character2, objectLayer)
-        this.physics.add.collider(this.character2,otherLayer )
+        this.physics.add.collider(this.character2, otherLayer)
         this.physics.add.collider(this.character2, this.santa)
-
+    
     
 
         // Create anims 
-        createCharacterAnims(this.anims)
-
-
-
-        this.anims.create({
-            key:'santa',
-            frames: this.anims.generateFrameNames('santa', {start:0, end:10}),
-            repeat: -1,
-            frameRate:5
-        })
-    
+        createCharacterAnims(this.anims) 
+        createAvatarAnims(this.anims)
 
 
         //Play anims
 
     
         this.santa.play('santa')
+        this.characters.forEach ( (character) => {
+           let dataCharacter = this.components.findComponent(character, DataPeople) as DataPeople
+           character.play(`avatar${dataCharacter.avatarNumber}`)
+        })
 
     
         //Sounds
@@ -166,25 +221,7 @@ export default class Preloader extends Phaser.Scene {
             collidingTileColor:  new Phaser.Display.Color(243,234,48,255),
             faceColor: new Phaser.Display.Color(40,39,37,255)
         })
-
        
-
-        // this.components.addComponent(this.character2, new Dialog("hello"))
-
-        
-
-    
-        
-
-
-       
-
-        
-
-
-    
-
-
 }
        
 
@@ -192,9 +229,8 @@ export default class Preloader extends Phaser.Scene {
 
 
     update (_t : number, dt:number) {
-        
-        this.components.update(dt) // Part of the component specification
-        
+        // Part of the component specification
+        this.components.update(dt) 
 
     
     }

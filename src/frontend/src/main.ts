@@ -1,7 +1,8 @@
 import Phaser from "phaser";
 import Preloader from "./scenes/Preloader"
 import Prepeloader from "./scenes/Prepeloader";
-
+import School
+ from "./scenes/School";
 
 const config =  {
   type: Phaser.AUTO,
@@ -18,7 +19,7 @@ const config =  {
           debug : true
       }
   },
-  scene : [Prepeloader,Preloader],
+  scene : [Prepeloader,School,Preloader],
   scale : {
       zoom: 2,
       

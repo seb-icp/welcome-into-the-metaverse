@@ -1,12 +1,4 @@
 { "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"..\/tileset\/city.json"
-        }
-    },
  "height":25,
  "infinite":false,
  "layers":[

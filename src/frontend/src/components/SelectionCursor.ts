@@ -1,33 +1,39 @@
 // @ts-ignore
-import Phaser from "phaser";
+import Phaser, { GameObjects } from "phaser";
 
 import {IComponent, IComponentsService} from "../services/ComponentService"
 
-import People from "./People";
-import DialogTry from "../plugin/DialogTry";
+
+
+import DataPeople from "./DataPeople";
+import DialogBox from "./DialogBox";
 
 
 export default class SelectionCursor implements IComponent {
     
     private readonly cursors! : Phaser.Types.Input.Keyboard.CursorKeys
     private readonly distance : number
-    private readonly people : Phaser.Physics.Arcade.Sprite
+    private readonly pnjs : Phaser.Physics.Arcade.StaticGroup
+    private readonly character : Phaser.GameObjects.GameObject
 
     private selector!: Phaser.Types.Physics.Arcade.ImageWithDynamicBody
     private gameObject! : Phaser.GameObjects.Shape
     private components !: IComponentsService 
+    private dialog : DialogBox | undefined
 
-    private selectedPeople? : People
+    private selectedPeople : Phaser.GameObjects.GameObject | undefined
 
-    constructor(cursors : Phaser.Types.Input.Keyboard.CursorKeys, people : Phaser.Physics.Arcade.Sprite,  distance = 24) {
+    constructor(cursors : Phaser.Types.Input.Keyboard.CursorKeys, pnjs : Phaser.Physics.Arcade.StaticGroup, character : Phaser.GameObjects.GameObject , distance = 24) {
         this.cursors = cursors
-        this.people = people
+        this.pnjs = pnjs
         this.distance = distance
+        this.character = character
     }
 
     init(go : Phaser.GameObjects.GameObject, components : IComponentsService) {
         this.gameObject =  go as Phaser.GameObjects.Shape
         this.components = components
+        this.dialog = this.components.findComponent(this.character,DialogBox)
     }
     
     awake () {
@@ -38,7 +44,7 @@ export default class SelectionCursor implements IComponent {
         scene.physics.add.existing(box)
 
         this.selector = box as unknown as Phaser.Types.Physics.Arcade.ImageWithDynamicBody
-        scene.physics.add.overlap(this.selector, this.people , this.handleOverlap, undefined , this)
+        scene.physics.add.overlap(this.selector, this.pnjs.getChildren() , this.handleOverlap, undefined , this)
     }
 
     update() {
@@ -60,21 +66,34 @@ export default class SelectionCursor implements IComponent {
     
     }
 
-    private handleOverlap (_obj1 : Phaser.GameObjects.GameObject, people : Phaser.GameObjects.GameObject) {
+    private handleOverlap (_obj1 : Phaser.GameObjects.GameObject, pnj : Phaser.GameObjects.GameObject) {
        
+        if (!Phaser.Input.Keyboard.JustUp(this.cursors.space))
+		{
+			return
+		}
+
         
-        if (this.selectedPeople?.gameObject === people) {
-            return
+
+      if (this.dialog === undefined) {
+          console.log("problem...")
+          return;
+      }
+      if (this.dialog.isDialogBoxVisible()) {
+          return; //Means we are alredy talking to someone
         }
-        console.log(this.components) //this is undefined
         
-        
+        this.selectedPeople = pnj
+        const data = this.components.findComponent(this.selectedPeople, DataPeople)
+        this.dialog!._toggleWindow() 
+        let text = `Hello my name is ${data.name}! ${data.message}`
+        if (data.name === 'santa') {
+            text = "Do you want some ICP ?"
+        }
+      
+      
 
-        this.selectedPeople = this.components.findComponent(people , People)
-        let dialog = new DialogTry (this.gameObject)
-
-        dialog.createWindow()
-        dialog.setText(`Hello my name is ${this.selectedPeople?.name},  ${this.selectedPeople?.message}`, true)
+        this.dialog!.setText(text, true)
 
     }
 }

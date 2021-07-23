@@ -1,7 +1,7 @@
 import { IComponent } from "../services/ComponentService";
 //Will be used to store data
 
-export default class People implements IComponent {
+export default class DataPeople implements IComponent {
 
 
     readonly name : string
@@ -17,7 +17,7 @@ export default class People implements IComponent {
     }
 
     init (go: Phaser.GameObjects.GameObject) {
-        this.gameObject = go //Probably the main character
+        this.gameObject = go 
     }
 
 }

@@ -1,7 +1,7 @@
+import { IComponent } from "../services/ComponentService"
 import Phaser from "phaser"
 
-export default class DialogTry {
-
+export default class DialogBox implements IComponent{
 
     private gameObject : Phaser.GameObjects.GameObject
 
@@ -10,7 +10,7 @@ export default class DialogTry {
     private readonly borderAlpha : number
     private readonly windowAlpha: number
     private readonly windowColor: number
-    private readonly windowHeight : number
+    public windowHeight : number
     private readonly padding : number
     private readonly dialogSpeed : number
     
@@ -31,15 +31,22 @@ export default class DialogTry {
         this.borderThickness = 3;
         this.borderColor = 0x907748;
         this.borderAlpha = 1;
-        this.windowAlpha =  0.8;
+        this.windowAlpha =  0.9;
         this.windowColor =  0x303030;
         this.windowHeight =  150;
         this.padding =  32;
-        this.dialogSpeed =  3;
+        this.dialogSpeed =  4;
 
         this.eventCounter = 0
 
         this.visible = true
+    }
+    changeWindowHeight(value : number) {
+        this.windowHeight = value
+    }
+
+    init(go:Phaser.GameObjects.GameObject) {
+        console.log(go)
     }
 
     _getGameWidth = () => {
@@ -170,7 +177,7 @@ export default class DialogTry {
         if (animate) {
             this.timedEvent = scene.time.addEvent({
             
-            delay: 150 - (this.dialogSpeed * 30),
+            delay: 100 - (this.dialogSpeed * 30),
             callback: this._animateText,
             callbackScope: this,
             loop: true
@@ -186,4 +193,13 @@ export default class DialogTry {
             this.timedEvent.remove()
         }
     }
+
+    isDialogBoxVisible = () => {
+        return (this.visible)
+    }
+
+
+
+
+   
 }
