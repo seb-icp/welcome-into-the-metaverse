@@ -24,7 +24,11 @@ export default class Prepeloader extends Phaser.Scene {
           this.load.spritesheet('avatar8', './character/avatar8.png', {frameWidth:16, frameHeight : 32})
           this.load.spritesheet('avatar9', './character/avatar9.png' , {frameWidth:16, frameHeight : 32})
           this.load.spritesheet('avatar10', './character/avatar10.png', {frameWidth:16, frameHeight : 32})
-      
+          this.load.spritesheet('peopleInSchool', './tileset/0_All_reading.png', {frameWidth:16, frameHeight: 32})
+          this.load.spritesheet('guyComputer', './character/Adam_sit2_16x16.png', {frameWidth:32, frameHeight :32})
+          this.load.spritesheet('girlComputer', './character/Conference_woman_sit2_16x16.png', {frameWidth:32, frameHeight :32})
+          this.load.spritesheet('guyBar',"./character/Conference_man_idle_anim_16x16.png" , {frameWidth: 16 , frameHeight:32})
+          this.load.spritesheet('girlSit',"./character/Amelia_sit3_16x16.png", {frameWidth:16, frameHeight:32})
   
           // Load the map
   

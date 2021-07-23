@@ -1,14 +1,13 @@
 import Phaser from "phaser";
 
 import { createCharacterAnims } from "../anims/MainCharacter";
-import { createAvatarAnims } from "../anims/OtherCharacter";
+import { createAvatarAnims } from "../anims/CityCharacter";
 
 import ComponentService from "../services/ComponentService";
 import KeyboardMovement from "../components/KeyboardMovements";
 import AnimationOnInput from "../components/AnimationOnInput";
 import SelectionCursor from "../components/SelectionCursor";
 import DataPeople from "../components/DataPeople";
-
 import DialogBox from "../components/DialogBox";
 
 export default class Preloader extends Phaser.Scene {
@@ -20,7 +19,6 @@ export default class Preloader extends Phaser.Scene {
     private santa! : Phaser.Physics.Arcade.Sprite
 
     private dialogBox : DialogBox | undefined
-   
 
     private characters : Phaser.Physics.Arcade.Sprite[] = []
     
@@ -62,7 +60,7 @@ export default class Preloader extends Phaser.Scene {
         objectLayer.setCollisionByProperty({collide:true})
         otherLayer.setCollisionByProperty({collide:true})
 
-
+        
         //Add sprite to characters
 
 
@@ -174,7 +172,7 @@ export default class Preloader extends Phaser.Scene {
         this.dialogBox = this.components.findComponent(this.character2, DialogBox)
         this.dialogBox!.createWindow()
         this.dialogBox!._toggleWindow()
-        this.components.addComponent(this.character2, new SelectionCursor (this.cursors, pnjs , this.character2))
+        this.components.addComponent(this.character2, new SelectionCursor (this.cursors, pnjs , this.character2, 8, 'city'))
         
         this.components.addComponent(this.santa , new DataPeople("santa", 'hohoho!' , 18)) //We need to add a Data component if we want to interact with Santa because the Selection Cursor uses it ... 
        

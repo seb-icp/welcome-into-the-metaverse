@@ -1,13 +1,14 @@
 // @ts-ignore
 import Phaser, { GameObjects } from "phaser";
 
+
 import {IComponent, IComponentsService} from "../services/ComponentService"
 
 
 
 import DataPeople from "./DataPeople";
 import DialogBox from "./DialogBox";
-
+import { playWithWall } from "../wall";
 
 export default class SelectionCursor implements IComponent {
     
@@ -21,13 +22,16 @@ export default class SelectionCursor implements IComponent {
     private components !: IComponentsService 
     private dialog : DialogBox | undefined
 
+    private sceneName : string //Temporary solution
+
     private selectedPeople : Phaser.GameObjects.GameObject | undefined
 
-    constructor(cursors : Phaser.Types.Input.Keyboard.CursorKeys, pnjs : Phaser.Physics.Arcade.StaticGroup, character : Phaser.GameObjects.GameObject , distance = 24) {
+    constructor(cursors : Phaser.Types.Input.Keyboard.CursorKeys, pnjs : Phaser.Physics.Arcade.StaticGroup, character : Phaser.GameObjects.GameObject , distance = 8, sceneName :string) {
         this.cursors = cursors
         this.pnjs = pnjs
         this.distance = distance
         this.character = character
+        this.sceneName = sceneName
     }
 
     init(go : Phaser.GameObjects.GameObject, components : IComponentsService) {
@@ -68,7 +72,7 @@ export default class SelectionCursor implements IComponent {
 
     private handleOverlap (_obj1 : Phaser.GameObjects.GameObject, pnj : Phaser.GameObjects.GameObject) {
        
-        if (!Phaser.Input.Keyboard.JustUp(this.cursors.space))
+        if (!this.cursors.space.isDown)
 		{
 			return
 		}
@@ -80,18 +84,31 @@ export default class SelectionCursor implements IComponent {
           return;
       }
       if (this.dialog.isDialogBoxVisible()) {
+          console.log('already talking to someone')
           return; //Means we are alredy talking to someone
+          
         }
+
         
         this.selectedPeople = pnj
         const data = this.components.findComponent(this.selectedPeople, DataPeople)
         this.dialog!._toggleWindow() 
-        let text = `Hello my name is ${data.name}! ${data.message}`
-        if (data.name === 'santa') {
-            text = "Do you want some ICP ?"
+        
+        let text : string = '....'
+        if (this.sceneName === 'city') {
+                text = `Hello my name is ${data.name}! ${data.message}`
+            if (data.name === 'santa') {
+                text = "Do you want some ICP ?"
+            }
         }
-      
-      
+
+        if (this.sceneName === 'school') {
+            if (data.name === 'girl') {
+                playWithWall()
+            }
+        }
+
+        text = `${data.message}`
 
         this.dialog!.setText(text, true)
 

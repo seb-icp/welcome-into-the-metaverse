@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Metaverse</title>
     <style>
       html, body {
     height: 100%;
@@ -25,8 +25,11 @@
     </style>
   </head>
   <body>
-    <div id="game"></div>
+    <div style="margin: 0 auto" id="game"></div>
+    <div style="display:none; padding: 20px; margin: 0 auto" id="inputWall">
+      <input type="text" name="nameField" placeholder="Write a short message" style="font-size: 32px" id="textWall">
+      <input type="button" name="playButton" value="Let's Play" style="font-size: 32px" id="btnWall">
+    </div>
     <script type="module" src="/src/frontend/src/main.ts"></script>
-    
   </body>
 </html>
