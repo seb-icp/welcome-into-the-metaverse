@@ -1,7 +1,7 @@
 import type { Principal } from '@dfinity/agent';
 import { Actor,HttpAgent } from "@dfinity/agent";
-import DataPeople from './components/DataPeople';
-import {idlFactory as multiverse_idl , canisterId as multiverse_id} from "./multiverse.js"
+import DataPeople from '../../components/DataPeople';
+import {idlFactory as multiverse_idl , canisterId as multiverse_id} from "../metaverse/multiverse.js"
 
 
 type Character = Character_2;

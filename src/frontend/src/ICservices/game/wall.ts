@@ -1,6 +1,6 @@
 //Script that allows us to play with wall and interact with an other Internet Computer services from inside the game
 import { Actor,HttpAgent } from "@dfinity/agent";
-import {idlFactory as wall_idl , canisterId as wall_id} from "./ICservices/wall/counter"
+import {idlFactory as wall_idl , canisterId as wall_id} from "../wall/counter"
 
 
 const agent = new HttpAgent();

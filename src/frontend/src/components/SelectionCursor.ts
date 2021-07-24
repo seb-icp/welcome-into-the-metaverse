@@ -1,14 +1,10 @@
 // @ts-ignore
-import Phaser, { GameObjects } from "phaser";
-
-
+import Phaser from "phaser";
 import {IComponent, IComponentsService} from "../services/ComponentService"
-
-
 
 import DataPeople from "./DataPeople";
 import DialogBox from "./DialogBox";
-import { playWithWall } from "../wall";
+import { playWithWall } from "../ICservices/game/wall";
 
 export default class SelectionCursor implements IComponent {
     
@@ -91,10 +87,12 @@ export default class SelectionCursor implements IComponent {
 
         
         this.selectedPeople = pnj
-        const data = this.components.findComponent(this.selectedPeople, DataPeople)
+        const data = this.components.findComponent(pnj, DataPeople)
         this.dialog!._toggleWindow() 
         
         let text : string = '....'
+        //This is fucked but will fix that later
+
         if (this.sceneName === 'city') {
                 text = `Hello my name is ${data.name}! ${data.message}`
             if (data.name === 'santa') {
@@ -102,13 +100,36 @@ export default class SelectionCursor implements IComponent {
             }
         }
 
-        if (this.sceneName === 'school') {
+        else if (this.sceneName === 'school') {
             if (data.name === 'girl') {
                 playWithWall()
             }
+
+            if (data.name === 'ghost') {
+                text = `${data.message}`
+                this.dialog!.setText(text, true)
+                pnj.destroy()
+                return;
+            }
+
+            if(data.name === 'ghost2'|| data.name === 'ghost3' || data.name === 'ghost4') { //To move from school to city scene
+                const {scene} = this.gameObject
+                scene.scene.start('city')
+                return;
+            }
+            
+            if(data.name === 'item') {
+                text = data.message
+            }
+            else {
+                text = data.message
+            }
         }
 
-        text = `${data.message}`
+        else {
+            text = 'Hmm this is strange, probably a bug you shouldnt be here'
+        }
+        
 
         this.dialog!.setText(text, true)
 

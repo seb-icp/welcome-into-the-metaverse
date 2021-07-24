@@ -1,8 +1,9 @@
 import Phaser from "phaser";
-import Preloader from "./scenes/Preloader"
-import Prepeloader from "./scenes/Prepeloader";
-import School
- from "./scenes/School";
+
+//Scenes
+import City from "./scenes/City"
+import Preloader from "./scenes/Preloader";
+import School from "./scenes/School";
 
 const config =  {
   type: Phaser.AUTO,
@@ -16,10 +17,10 @@ const config =  {
       default: 'arcade',
       arcade : {
           gravity : {y : 0},
-          debug : false
+          debug : true
       }
   },
-  scene : [Prepeloader,School,Preloader],
+  scene : [Preloader,School,City],
   scale : {
       zoom: 2,
       

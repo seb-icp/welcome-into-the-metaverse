@@ -45,6 +45,12 @@ const createSchoolAnims = (anims : Phaser.Animations.AnimationManager) => {
         repeat:-1,
         frameRate:2
     })
+    anims.create({
+        key:'ghost',
+        frames: anims.generateFrameNames('ghostReal', {start:0 , end : 3}),
+        repeat : -1,
+        frameRate:3
+    })
     
 
     
