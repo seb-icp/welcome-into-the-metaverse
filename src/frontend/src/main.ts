@@ -6,6 +6,7 @@ import Preloader from "./scenes/Preloader";
 import School from "./scenes/School";
 
 
+
 const config =  {
   type: Phaser.AUTO,
   width: 400,

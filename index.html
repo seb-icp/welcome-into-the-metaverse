@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Metaverse</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
     html,
     body {
       height: 100%;
@@ -74,12 +75,12 @@
       width: 300px;
       background-color: whitesmoke;
       border-radius: 10px;
-      padding: 20px;
+      padding: 10px;
       color: grey;
       font-weight: bold;
       display: flex-col;
       margin: 0 auto;
-      margin-top: 40px;
+      margin-top: 10px;
 
     }
 
@@ -218,6 +219,7 @@
     }
     .yesNo {
       margin:150px;
+      display: none;
     }
 
     textarea{
@@ -225,7 +227,7 @@
       font-size: 18px;
     }
     .inputText {
-      display: flex;
+      display: none;
       flex-direction: column;
       width : 100%;
       margin-top: 100px;
@@ -234,6 +236,27 @@
       width: 25%;
       margin: 15px auto;
     }
+    .default {
+      text-align: center;
+      color : grey;
+      font-size: 50px;
+      margin-top: 210px;
+      font-weight: 800;
+      font-family: Indie Flower,ui-sans-serif,system-ui ;
+    }
+    #titleZone {
+      margin-top: 25px;
+      padding: 5px;
+      border: 1px solid grey;
+      width: 60%;
+      color: grey;
+      text-align: center;
+      margin: 0 auto;
+      border-radius: 5px;
+      display: none;  
+    }
+  
+    
     
   </style>
 </head>
@@ -250,18 +273,24 @@
         <div><button class="btnCredits"> Credits 🌍</button></div>
       </div>
       <div class="zone">
+        
         <div class="zoneGame">
           <h1 class="gameInfo">Keep this section while playing the game</h1>
-          <h1 class="gameInfo"> Commands : Arrows to move / Spacebar to interact with your environment / Below for more advanced interactions bof bof </h1>
-          <!-- <div class="yesNo">
+          <h1 class="gameInfo"> Arrows to move / Spacebar to interact </h1>
+          <h2 id='titleZone'> The Wall//- </h2>
+            <div class="yesNo">
              <button class="btnYes"> Yes </button>
             <button class="btnNo"> No</button>
-          </div> -->
+          </div>
           <div class="inputText">
               <textarea name="message" id="message" cols="50" rows="10" placeholder="Write here" ></textarea>
               <button class="btnOk"> Ok </button>
-          </div>
-          <!-- <div class="quizz"></div> -->
+          </div> 
+           <div class="quizz"></div> 
+           <div class="default">
+            The metaverse is metacool
+          </div> 
+          
         </div>
         <div class="zoneQuests">
           <div class="quest-wrap">
@@ -303,8 +332,8 @@
       </div>
     </div>
 </div>
+  <script type="module" src="/src/frontend/src/basic.ts"></script>
   <script type="module" src="/src/frontend/src/main.ts"></script>
-  <script src="basic.js"></script>
 </body>
 
 </html>

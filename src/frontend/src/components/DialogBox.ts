@@ -45,8 +45,8 @@ export default class DialogBox implements IComponent{
         this.windowHeight = value
     }
 
-    init(go:Phaser.GameObjects.GameObject) {
-        console.log(go)
+    init(_go:Phaser.GameObjects.GameObject) {
+        // console.log(go)
     }
 
     _getGameWidth = () => {
@@ -98,7 +98,7 @@ export default class DialogBox implements IComponent{
 
     _toggleWindow = () => {
         this.visible = !this.visible
-        console.log("ok")
+        // console.log("ok")
 
         if (this.text) this.text.visible = this.visible;
         if (this.graphic) this.graphic.visible = this.visible;

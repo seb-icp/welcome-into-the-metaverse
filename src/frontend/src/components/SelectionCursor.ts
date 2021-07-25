@@ -6,6 +6,7 @@ import DataPeople from "./DataPeople";
 import DialogBox from "./DialogBox";
 import { playWithWall } from "../ICservices/game/wall";
 
+
 export default class SelectionCursor implements IComponent {
     
     private readonly cursors! : Phaser.Types.Input.Keyboard.CursorKeys
@@ -135,12 +136,15 @@ export default class SelectionCursor implements IComponent {
                 return;
             }
             if (data.name === 'wall') {
+
+    
+                const {scene} = this.gameObject
                 console.log('Wall')
                 text = `${data.message}`
                 this.dialog!._toggleWindow() 
                 this.dialog!.setText(text, true)
-            
-                playWithWall()
+                playWithWall(scene)
+                
                 return;
 
             }

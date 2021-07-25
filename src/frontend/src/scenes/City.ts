@@ -120,20 +120,19 @@ export default class City extends Phaser.Scene {
 
         // let peoples = this.game.cache.custom.customCache.get('characters') as DataPeople[]
         const randomPosition : [x : number , y : number][] = [[320,100],[300,250],[200,228],[150,50],[150,280],[20,64],[180,350],[170,130],[320,30],[391,360]]
-        console.log('peoples', peoples)
+ 
 
         for (let i = 0 ; i<10 ; i++) {
 
             let avatarNumber = peoples[i].avatarNumber
             let avatar = `avatar${avatarNumber}`
             this.characters[i] = this.physics.add.sprite(randomPosition[i][0] , randomPosition[i][1], avatar, 0)
-            console.log(this.characters[i])
             this.components.addComponent(this.characters[i], new DataPeople(peoples[i].name, peoples[i].message, peoples[i].avatarNumber))
             this.characters[i].body.setSize(15,25)
             this.characters[i].body.offset.y = 8
             this.physics.add.collider(this.character2, this.characters[i])
             this.characters[i].setImmovable();
-            console.log("done")
+            
         }
         this.santa = this.physics.add.sprite(110,235,'santa',0)
        
@@ -165,7 +164,7 @@ export default class City extends Phaser.Scene {
         pnjs.addMultiple(this.characters)
         pnjs.add(this.santa)
         pnjs.add(ghost)
-        console.log(pnjs.children)
+    
         
         this.components.addComponent(this.character2, new DialogBox (this.character2))
         this.dialogBox = this.components.findComponent(this.character2, DialogBox)
