@@ -43,6 +43,7 @@ export default class City extends Phaser.Scene {
     }
 
     create() {
+        console.log("City creation")
 
         const ghost = this.physics.add.sprite(235,95,'ghostFalseCity',0)
         this.cameras.main.fadeIn(1000, 0, 0, 0)
@@ -206,18 +207,6 @@ export default class City extends Phaser.Scene {
         // const backgroundSound = this.sound.add('inTheCity')
         // backgroundSound.play()
         
-
-        //Launch UI-Scene inside this scene
-        this.scene.launch('ui')
-        
-        
-
-
-        // const {scene} = this.gameObject
-        // scene.cameras.resize
-        // let scene = new GameInTheGame (this.character2)
-        // this.scene.launch('gameInTheGame')
-
         //Debug functionality
 
         // const debugGraphics = this.add.graphics().setAlpha(0.7)

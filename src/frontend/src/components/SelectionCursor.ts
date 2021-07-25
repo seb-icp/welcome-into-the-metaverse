@@ -20,7 +20,7 @@ export default class SelectionCursor implements IComponent {
     private dialog : DialogBox | undefined
 
     private sceneName : string //Temporary solution
-
+    private securityScene : 0 | 1 //Solution for multiples scenes creation
   
 
     constructor(cursors : Phaser.Types.Input.Keyboard.CursorKeys, pnjs : Phaser.Physics.Arcade.StaticGroup, character : Phaser.GameObjects.GameObject , distance = 8, sceneName :string) {
@@ -29,6 +29,7 @@ export default class SelectionCursor implements IComponent {
         this.distance = distance
         this.character = character
         this.sceneName = sceneName
+        this.securityScene = 0
     }
 
     init(go : Phaser.GameObjects.GameObject, components : IComponentsService) {
@@ -101,9 +102,13 @@ export default class SelectionCursor implements IComponent {
                 const {scene} = this.gameObject
                 scene.cameras.main.fadeOut(1000, 0, 0, 0)
                 scene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (_cam : any, _effect : any) => {
-                    scene.time.delayedCall(1000, () => {
-                        scene.scene.start('school')
-                    })
+                    if (this.securityScene === 0) {
+                        this.securityScene =1
+                        scene.time.delayedCall(1000, () => {
+                            scene.scene.start('school')
+                            this.securityScene = 0
+                        })
+                    }
                 })
                 return;
             }
@@ -129,9 +134,13 @@ export default class SelectionCursor implements IComponent {
                 const {scene} = this.gameObject
                 scene.cameras.main.fadeOut(1000, 0, 0, 0)
                 scene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (_cam : any, _effect : any) => {
-                    scene.time.delayedCall(1000, () => {
-                        scene.scene.start('city')
-                    })
+                    if (this.securityScene ===0) {
+                        this.securityScene = 1
+                        scene.time.delayedCall(1000, () => {
+                            scene.scene.start('city')
+                        })
+                    }
+        
                 })
                 return;
             }

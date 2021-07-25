@@ -35,7 +35,7 @@ export default class School extends Phaser.Scene {
     } 
 
     create() {
-
+        console.log("School creation")
         // Create anims 
         createCharacterAnims(this.anims) 
         //Items to interact with using the "ghost" trick: temporary solutions to interact with items
@@ -133,11 +133,40 @@ export default class School extends Phaser.Scene {
         boyBar.play('guyBar')
         ghost.play('ghost')
 
-        this.components.addComponent(teacher , new DataPeople("teacher", 'Welcome to the Motoko School! Take a seat and start a quizz' , 18))
+
+        const randomForGirlComputer : string[] = ["I'm building Distrikt, a decentralized professional social network! Come, go and expand your distrikt!", "I'm building Bunchd, I'm experimenting crazy stuffs and I'm eating ramen 🍜", "Motoko School will be awesome :)", "Hello I'm Liz, what FUD is there today ? 🥊"]
+        const randomForGuyComputer : string[] = ["I'm hard at work building Sudograph..check out beta 0.3.0 already! Oh and don't forget to listen to Demergence! 🎧", "Bonjour! I'm building Aedile, a management project that I'll help you collaborate and build other projects on the Internet Computer! 🛠", "I'm building Stoic Wallet and Rise of The Magni, check out our lab : Toniq Labs! 🧪" , "I'm building Fleek and I'm plugging in the metaverse 🔌", "Hey, I'm building DSCVR, you're favorite Internet Computer application! Hmm what do you think about Hackathon #2? 💭 ", "Hello I'm Kyle Peacock, I'm recording an awesome tutorial serie and.... 0.80 is out! 📹", "Hello it's me Nico, I love Web 3.0, governance but above all I love when my code compiled and there is no error. ✨" , "Welcome to the Dfinity Developer community, my name is Igor,I can help you if you need any assistance here! 👨🏻‍🏫 " , "Hello! I'm Bob and I write a ton of stuff to explain how the Internet Computer works, check out my guide somewhere in the building! 📚"]
+        const randomForComputer  : string [] =  ["List your canisters on Canlista!", "Join the Dfinity Dev Discord and be there on Friday : 12 PM PT / 3 PM ET / 9 PM CET / 7 PM UTC ... not 6PM UTC!" , "Join the ICP maximalist network and becomes an ambassador!" , "Claim your cycles!" , "Join the ICP squad and becomes a contributor!", "Get started at dfinity.org/developers/ "]
+        const randomForGirl : string [] = ["I'm playing Saga tarot, do you want your fortune to be told? 🔮 \n * More infos at : l2jyf-nqaaa-aaaah-qadha-cai. raw.ic0.app *" , "I'm playing FudBuster, who said there is no ressource to learn here? 📚 \n * More infos at https://zxkrk-xyaaa-aaaad-qad5q-cai.ic.fleek.co/ *", "I'm playing at Rise of the Magni, show me your strategy! 🧠 \n * More infos at https://riseofthemagni.com/ *", "I'm playing Motoko Runner, I love this game! Did you know that I've installed it on one of our computer here? 👨‍💻" , "I'm playing at Fly Aves! Daaaaaamn this is hard  \n * More infos at https://bjv3y-niaaa-aaaah-aadsq-cai.ic0.app/ *"]
+        // const randomForTelevision : string[] = ["ICP-NEWS The Internet Computer Reporter 📺" , "BREAKING NEWS - Dominic Williams just announced Ethereum and IC intereropability through Chain Key Cryptography 🔑" , "Mercury Launch Event 🎤 - Announcing the Internet Computer Mainnet and a 20 year Roadmap!" , "BREAKING NEWS - There is no trace of COVID 🦠 in the metaverse 🙌" , "BREAKING NEWS - The Internet Computer blockchain recently surpassed 100MM blocks 💯 of Friday, July 23, 2021 09:15:28 AM"]
+
+        function getARandomMessage (array : string []) {
+            let l = array.length
+            console.log(l)
+            const x = Math.floor(Math.random() * l);
+            return (array[x])
+        }
+
+        const messageA = getARandomMessage(randomForGirlComputer)
+        console.log(messageA)
+
+        const messageB = getARandomMessage(randomForGuyComputer)
+        console.log(messageB)
+
+        const messageC = getARandomMessage(randomForComputer)
+        console.log(messageC)
+
+        const messageD = getARandomMessage(randomForGirl)
+        console.log(messageD)
+
+        // const messageE = getARandomMessage(randomForTelevision)
+    
+
+        this.components.addComponent(teacher , new DataPeople("teacher", "Welcome to the Motoko School, my name is Steve, Ill be your teacher for day! Take a seat and start a quizz" , 18))
         this.components.addComponent(girl , new DataPeople("girl", 'Have you tried writing on the board on my left ? You should...' , 18))
-        this.components.addComponent(girlComputer , new DataPeople("girlComputer", 'I"m building Bunchd!' , 18))
-        this.components.addComponent(boyComputer , new DataPeople("boyComputer", 'Woah!' , 18))
-        this.components.addComponent(girlSit , new DataPeople("girl2", "I'm playing Saga tarot, do you want your fortune to be told? 🔮 \n \n * More infos at : l2jyf-nqaaa-aaaah-qadha-cai. raw.ic0.app *" , 18))
+        this.components.addComponent(girlComputer , new DataPeople("girlComputer", messageA , 18))
+        this.components.addComponent(boyComputer , new DataPeople("boyComputer", messageB , 18))
+        this.components.addComponent(girlSit , new DataPeople("girl2", messageD , 18))
         this.components.addComponent(boyBar , new DataPeople("bar", 'Do you want something to drink ?' , 18))
 
         this.components.addComponent(ghost, new DataPeople ("ghost", "I'm a ghost in the shell, will you catch me?", 18))
@@ -146,14 +175,14 @@ export default class School extends Phaser.Scene {
         this.components.addComponent(ghost4, new DataPeople ("ghost4", "I'm a ghost in the shell, will you catch me?", 18))
 
         this.components.addComponent(board, new DataPeople  ("item", 'There are currently 214 nodes around the world that powers the Interner Computer 🌍  \n \n* More infos on ic.rocks🧊 *',18))
-        this.components.addComponent(computer1, new DataPeople  ("item", 'Get started at dfinity.org/developers/ 💾' ,18))
-        this.components.addComponent(computer2, new DataPeople  ("gameInTheGame", 'Join the Dfinity Dev Discord',18))
+        this.components.addComponent(computer1, new DataPeople  ("item", messageC ,18))
+        this.components.addComponent(computer2, new DataPeople  ("gameInTheGame", 'd' ,18))
         this.components.addComponent(books1, new DataPeople  ("item", 'Non-interactive distributed key generation and key resharing. March 13,2021. Jens Groth. \n \n *Woah I have no idea what this means*',18))
         this.components.addComponent(books2, new DataPeople  ("item", 'The ICP guide - The ultimate guide to everything related to the Internet Computer Protocol.📚  \n \n *More infos on icp.guide *',18))
         this.components.addComponent(locker1, new DataPeople  ("item", '*This locker is locked for 8 years* 🔐 ',18))
         this.components.addComponent(locker2, new DataPeople  ("item", 'There seems to be 1 ICP inside this locker... how can I open this? 🤔 \n \n',18))
         this.components.addComponent(poolTable, new DataPeople  ("item", 'd ',18))
-        this.components.addComponent(wall, new DataPeople  ("wall", 'Should I write on this wall ?',18))
+        this.components.addComponent(wall, new DataPeople  ("wall", 'Should I try to write on this wall ?',18))
        
         
       
