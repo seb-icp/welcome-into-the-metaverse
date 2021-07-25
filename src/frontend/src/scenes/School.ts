@@ -23,28 +23,9 @@ export default class School extends Phaser.Scene {
     }
 
     preload () {
-        this.load.image('tiles1' , './tileset/0_All_reading.png')
-        this.load.image('tiles2' , './tileset/5_Classroom_and_library_16x16.png')
-        this.load.image('tiles3' , './tileset/Adam_16x16.png')
-        this.load.image('tiles4' , './tileset/Bob_16x16.png')
-        this.load.image('tiles5' , './tileset/Interiors_16x16.png')
-        this.load.image('tiles6' , './tileset/Room_Builder_borders_16x16.png')
-        this.load.image('tiles7' , './tileset/Room_Builder_Floors_16x16.png')
-        this.load.image('tiles8' , './tileset/Room_Builder_Walls_16x16.png')
-        this.load.audio('schoolSong', './audio/mahali-pazuri.mp3')
-
-        this.load.spritesheet('peopleInSchool', './tileset/0_All_reading.png', {frameWidth:16, frameHeight: 32})
-        this.load.spritesheet('guyComputer', './character/Adam_sit2_16x16.png', {frameWidth:32, frameHeight :32})
-        this.load.spritesheet('girlComputer', './character/Conference_woman_sit2_16x16.png', {frameWidth:32, frameHeight :32})
-        this.load.spritesheet('guyBar',"./character/Conference_man_idle_anim_16x16.png" , {frameWidth: 16 , frameHeight:32})
-        this.load.spritesheet('girlSit',"./character/Amelia_sit3_16x16.png", {frameWidth:16, frameHeight:32})
-        this.load.spritesheet('ghostReal' , './character/Ghost_1_angry_idle_16x16.png', {frameWidth: 16, frameHeight: 32})
-        this.load.spritesheet('ghostFalse', './character/Ghost_1_angry_idle_16x16.png', {frameWidth: 10, frameHeight: 20})
         
-        // this.load.spritesheet('door', './objects/animated_door_4.png', {frameWidth:15.3, frameHeight:32}) //Not clean borders
-        this.load.tilemapTiledJSON('school', './tileset/school.json')
-       
     }
+    
     init () {
         this.components = new ComponentService()
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -59,23 +40,23 @@ export default class School extends Phaser.Scene {
         createCharacterAnims(this.anims) 
         //Items to interact with using the "ghost" trick: temporary solutions to interact with items
 
-        const board = this.physics.add.sprite(115,12,'ghostFalse',0)
+        const board = this.physics.add.sprite(115,12,'ghostFalseSchool',0)
 
-        const computer1 = this.physics.add.sprite(180,45,'ghostFalse',0)
-        const computer2 = this.physics.add.sprite(180,80,'ghostFalse',0)
+        const computer1 = this.physics.add.sprite(180,45,'ghostFalseSchool',0)
+        const computer2 = this.physics.add.sprite(180,80,'ghostFalseSchool',0)
 
-        const books1 = this.physics.add.sprite(215,160,'ghostFalse',0)
-        const books2 = this.physics.add.sprite(350,218,'ghostFalse',0)
+        const books1 = this.physics.add.sprite(215,160,'ghostFalseSchool',0)
+        const books2 = this.physics.add.sprite(350,218,'ghostFalseSchool',0)
 
-        const locker1 = this.physics.add.sprite(170,220,'ghostFalse',0)
-        const locker2 = this.physics.add.sprite(105,220,'ghostFalse',0)  
+        const locker1 = this.physics.add.sprite(170,220,'ghostFalseSchool',0)
+        const locker2 = this.physics.add.sprite(105,220,'ghostFalseSchool',0)  
 
-        const poolTable = this.physics.add.sprite(300,100,'ghostFalse',0)    
-        const wall = this.physics.add.sprite(240,220,'ghostFalse',0)
+        const poolTable = this.physics.add.sprite(300,100,'ghostFalseSchool',0)    
+        const wall = this.physics.add.sprite(240,220,'ghostFalseSchool',0)
 
-        const ghost2 = this.physics.add.sprite(190,390,'ghostFalse', 0)
-        const ghost3 = this.physics.add.sprite(210,390,'ghostFalse', 0)
-        const ghost4 = this.physics.add.sprite(230,390,'ghostFalse', 0)
+        const ghost2 = this.physics.add.sprite(190,390,'ghostFalseSchool', 0)
+        const ghost3 = this.physics.add.sprite(210,390,'ghostFalseSchool', 0)
+        const ghost4 = this.physics.add.sprite(230,390,'ghostFalseSchool', 0)
         
 
 
@@ -166,13 +147,13 @@ export default class School extends Phaser.Scene {
 
         this.components.addComponent(board, new DataPeople  ("item", 'There are currently 214 nodes around the world that powers the Interner Computer 🌍  \n \n* More infos on ic.rocks🧊 *',18))
         this.components.addComponent(computer1, new DataPeople  ("item", 'Get started at dfinity.org/developers/ 💾' ,18))
-        this.components.addComponent(computer2, new DataPeople  ("itemRandom", 'Join the Dfinity Dev Discord',18))
+        this.components.addComponent(computer2, new DataPeople  ("gameInTheGame", 'Join the Dfinity Dev Discord',18))
         this.components.addComponent(books1, new DataPeople  ("item", 'Non-interactive distributed key generation and key resharing. March 13,2021. Jens Groth. \n \n *Woah I have no idea what this means*',18))
         this.components.addComponent(books2, new DataPeople  ("item", 'The ICP guide - The ultimate guide to everything related to the Internet Computer Protocol.📚  \n \n *More infos on icp.guide *',18))
         this.components.addComponent(locker1, new DataPeople  ("item", '*This locker is locked for 8 years* 🔐 ',18))
         this.components.addComponent(locker2, new DataPeople  ("item", 'There seems to be 1 ICP inside this locker... how can I open this? 🤔 \n \n',18))
         this.components.addComponent(poolTable, new DataPeople  ("item", 'd ',18))
-        this.components.addComponent(wall, new DataPeople  ("item", 'This is a wall seems I can write on it',18))
+        this.components.addComponent(wall, new DataPeople  ("wall", 'Should I write on this wall ?',18))
        
         
       
@@ -216,7 +197,10 @@ export default class School extends Phaser.Scene {
 
         //Audio
 
+        // this.sound.stopAll()
         // this.sound.play('schoolSong')
+
+        
     }
 
     update(_t : number , dt : number) {

@@ -20,7 +20,7 @@ export default class SelectionCursor implements IComponent {
 
     private sceneName : string //Temporary solution
 
-    private selectedPeople : Phaser.GameObjects.GameObject | undefined
+  
 
     constructor(cursors : Phaser.Types.Input.Keyboard.CursorKeys, pnjs : Phaser.Physics.Arcade.StaticGroup, character : Phaser.GameObjects.GameObject , distance = 8, sceneName :string) {
         this.cursors = cursors
@@ -42,7 +42,7 @@ export default class SelectionCursor implements IComponent {
 
         const box = scene.add.rectangle(0,0,16,16,0xffffff,0)
         scene.physics.add.existing(box)
-
+       
         this.selector = box as unknown as Phaser.Types.Physics.Arcade.ImageWithDynamicBody
         scene.physics.add.overlap(this.selector, this.pnjs.getChildren() , this.handleOverlap, undefined , this)
     }
@@ -70,7 +70,7 @@ export default class SelectionCursor implements IComponent {
        
         if (!this.cursors.space.isDown)
 		{
-			return
+			return;
 		}
 
         
@@ -85,11 +85,9 @@ export default class SelectionCursor implements IComponent {
           
         }
 
-        
-        this.selectedPeople = pnj
+    
         const data = this.components.findComponent(pnj, DataPeople)
-        this.dialog!._toggleWindow() 
-        
+     
         let text : string = '....'
         //This is fucked but will fix that later
 
@@ -98,15 +96,29 @@ export default class SelectionCursor implements IComponent {
             if (data.name === 'santa') {
                 text = "Do you want some ICP ?"
             }
+            if (data.name === 'ghostCity') {
+                const {scene} = this.gameObject
+                scene.cameras.main.fadeOut(1000, 0, 0, 0)
+                scene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (_cam : any, _effect : any) => {
+                    scene.time.delayedCall(1000, () => {
+                        scene.scene.start('school')
+                    })
+                })
+                return;
+            }
         }
 
         else if (this.sceneName === 'school') {
             if (data.name === 'girl') {
-                playWithWall()
+                text = `${data.message}`
+                this.dialog!._toggleWindow() 
+                this.dialog!.setText(text, true)
+                return;
             }
 
             if (data.name === 'ghost') {
                 text = `${data.message}`
+                this.dialog!._toggleWindow() 
                 this.dialog!.setText(text, true)
                 pnj.destroy()
                 return;
@@ -114,13 +126,64 @@ export default class SelectionCursor implements IComponent {
 
             if(data.name === 'ghost2'|| data.name === 'ghost3' || data.name === 'ghost4') { //To move from school to city scene
                 const {scene} = this.gameObject
-                scene.scene.start('city')
+                scene.cameras.main.fadeOut(1000, 0, 0, 0)
+                scene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (_cam : any, _effect : any) => {
+                    scene.time.delayedCall(1000, () => {
+                        scene.scene.start('city')
+                    })
+                })
                 return;
+            }
+            if (data.name === 'wall') {
+                console.log('Wall')
+                text = `${data.message}`
+                this.dialog!._toggleWindow() 
+                this.dialog!.setText(text, true)
+            
+                playWithWall()
+                return;
+
             }
             
             if(data.name === 'item') {
                 text = data.message
             }
+            if (data.name === 'gameInTheGame') {
+
+
+                //Add some dialog to let choice
+
+                const {scene} = this.gameObject
+                function createElementFromHTML(htmlString : string) {
+                    var div = document.createElement('div');
+                    div.innerHTML = htmlString.trim();
+            
+                    return div; 
+                }
+                scene.scene.pause()
+
+                const div = createElementFromHTML(`<div class="wrap"><iframe  src="https://cieun-eiaaa-aaaad-qak6a-cai.raw.ic0.app/"/tool/"></iframe></div>`)
+                const buttonStop = createElementFromHTML(`<button class="buttonStop"> Wait  📀  </button>`)
+                const otherdiv = document.querySelector('#game') as HTMLDivElement
+
+                otherdiv?.appendChild(div)
+                otherdiv?.appendChild(buttonStop)
+
+                setTimeout(() => {
+                    const btnStop = document.querySelector('.buttonStop') as HTMLButtonElement
+                    btnStop.innerText = "Quit 🚦"
+
+                    const quitGame = () => {
+                        const gameDiv = document.querySelector('.wrap')
+                        gameDiv?.remove()
+                        btnStop.remove()
+                        scene.scene.resume()
+                    }
+                    btnStop.addEventListener('click', quitGame)
+                },7000)
+                return;
+            }
+
             else {
                 text = data.message
             }
@@ -130,7 +193,8 @@ export default class SelectionCursor implements IComponent {
             text = 'Hmm this is strange, probably a bug you shouldnt be here'
         }
         
-
+    
+        this.dialog!._toggleWindow() 
         this.dialog!.setText(text, true)
 
     }

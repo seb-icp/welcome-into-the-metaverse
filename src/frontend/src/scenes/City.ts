@@ -9,8 +9,9 @@ import AnimationOnInput from "../components/AnimationOnInput";
 import SelectionCursor from "../components/SelectionCursor";
 import DataPeople from "../components/DataPeople";
 import DialogBox from "../components/DialogBox";
+// import GameInTheGame from "./GameInTheGame";
 
-export default class Preloader extends Phaser.Scene {
+export default class City extends Phaser.Scene {
 
    
     private components! : ComponentService
@@ -21,7 +22,8 @@ export default class Preloader extends Phaser.Scene {
     private dialogBox : DialogBox | undefined
 
     private characters : Phaser.Physics.Arcade.Sprite[] = []
-    
+    private otherCamera! : Phaser.Cameras.Scene2D.Camera
+
     
     constructor() {
         super('city')
@@ -37,19 +39,15 @@ export default class Preloader extends Phaser.Scene {
 
 
     preload() {
-        console.log("Preload preload starts")
-        
-        //Get data from custom cache
-
-        
-       
+    
     }
 
     create() {
 
+        const ghost = this.physics.add.sprite(235,95,'ghostFalseCity',0)
+        this.cameras.main.fadeIn(1000, 0, 0, 0)
         
         
-    
          //Create and display the map
          const map = this.make.tilemap({ key : 'city' })
          const tileset = map.addTilesetImage('tilemap_packed', 'tiles')
@@ -166,6 +164,7 @@ export default class Preloader extends Phaser.Scene {
         const pnjs = this.physics.add.staticGroup()
         pnjs.addMultiple(this.characters)
         pnjs.add(this.santa)
+        pnjs.add(ghost)
         console.log(pnjs.children)
         
         this.components.addComponent(this.character2, new DialogBox (this.character2))
@@ -174,7 +173,8 @@ export default class Preloader extends Phaser.Scene {
         this.dialogBox!._toggleWindow()
         this.components.addComponent(this.character2, new SelectionCursor (this.cursors, pnjs , this.character2, 8, 'city'))
         
-        this.components.addComponent(this.santa , new DataPeople("santa", 'hohoho!' , 18)) //We need to add a Data component if we want to interact with Santa because the Selection Cursor uses it ... 
+        this.components.addComponent(this.santa , new DataPeople("santa", 'hohoho!' , 18)) //We need to add a Data component if we want to interact with Santa because the Selection Cursor uses it ...
+        this.components.addComponent(ghost, new DataPeople  ("ghostCity", 'Enter the school',18)) 
        
 
         //Add colliders 
@@ -203,22 +203,35 @@ export default class Preloader extends Phaser.Scene {
     
         //Sounds
        
+        this.sound.stopAll()
         // const backgroundSound = this.sound.add('inTheCity')
         // backgroundSound.play()
         
+
+        //Launch UI-Scene inside this scene
+        this.scene.launch('ui')
+        
+        
+
+
+        // const {scene} = this.gameObject
+        // scene.cameras.resize
+        // let scene = new GameInTheGame (this.character2)
+        // this.scene.launch('gameInTheGame')
+
         //Debug functionality
 
-        const debugGraphics = this.add.graphics().setAlpha(0.7)
-        objectLayer.renderDebug(debugGraphics, {
-            tileColor:null,
-            collidingTileColor:  new Phaser.Display.Color(243,234,48,255),
-            faceColor: new Phaser.Display.Color(40,39,37,255)
-        })
-        otherLayer.renderDebug(debugGraphics, {
-            tileColor:null,
-            collidingTileColor:  new Phaser.Display.Color(243,234,48,255),
-            faceColor: new Phaser.Display.Color(40,39,37,255)
-        })
+        // const debugGraphics = this.add.graphics().setAlpha(0.7)
+        // objectLayer.renderDebug(debugGraphics, {
+        //     tileColor:null,
+        //     collidingTileColor:  new Phaser.Display.Color(243,234,48,255),
+        //     faceColor: new Phaser.Display.Color(40,39,37,255)
+        // })
+        // otherLayer.renderDebug(debugGraphics, {
+        //     tileColor:null,
+        //     collidingTileColor:  new Phaser.Display.Color(243,234,48,255),
+        //     faceColor: new Phaser.Display.Color(40,39,37,255)
+        // })
        
 }
        
