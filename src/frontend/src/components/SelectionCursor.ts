@@ -7,6 +7,7 @@ import DialogBox from "./DialogBox";
 import { playWithWall } from "../ICservices/game/wall";
 
 
+
 export default class SelectionCursor implements IComponent {
     
     private readonly cursors! : Phaser.Types.Input.Keyboard.CursorKeys
@@ -105,6 +106,10 @@ export default class SelectionCursor implements IComponent {
                 } else {
                     text = "Do you want some ICP ?"
                 }
+            }
+            if (data.name === "secretGhost") {
+                text = "Oh you found me! 👻 I can give you my secret : 0251158944"
+
             }
             if (data.name === 'ghostCity') {
                 const {scene} = this.gameObject

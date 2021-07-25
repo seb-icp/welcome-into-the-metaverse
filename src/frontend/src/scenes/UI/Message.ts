@@ -3,6 +3,7 @@ function showMessage (message : string)  {
     const yesNo = window.document.querySelector('.yesNo') as HTMLDivElement
     const defaultZone = window.document.querySelector('.default') as HTMLDivElement
     const inputText = window.document.querySelector('.inputText') as HTMLDivElement
+   
 
     yesNo.style.display = 'none'
     defaultZone.style.display = 'none'

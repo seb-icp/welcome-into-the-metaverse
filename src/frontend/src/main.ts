@@ -6,7 +6,7 @@ import Preloader from "./scenes/Preloader";
 import School from "./scenes/School";
 
 //@ts-ignore
-window.ghostInSchool = true
+window.ghostInSchool = false
 
 const config =  {
   type: Phaser.AUTO,
@@ -20,7 +20,7 @@ const config =  {
       default: 'arcade',
       arcade : {
           gravity : {y : 0},
-          debug : true
+          debug : false
       }
   },
   scene : [Preloader,School,City],

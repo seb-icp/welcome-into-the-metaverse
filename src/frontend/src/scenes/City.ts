@@ -49,7 +49,7 @@ export default class City extends Phaser.Scene {
         //@ts-ignore
         console.log(window.ghostInSchool)
 
-        const ghost = this.physics.add.sprite(235,95,'ghostFalseCity',0)
+        const ghost = this.physics.add.sprite(235,95,'ghostFalseSchool',0)
         
         this.cameras.main.fadeIn(1000, 0, 0, 0)
         
@@ -174,9 +174,11 @@ export default class City extends Phaser.Scene {
         //Secret ghost
         //@ts-ignore
         if (window.ghostInSchool === true) {
-            var ghostSecret = this.physics.add.sprite(0,150,'ghostFalseCity',0)
+            var ghostSecret = this.physics.add.sprite(0,150,'ghostFalseSchool',0)
+            ghostSecret.alpha = 0
             ghostSecret.body.setSize(15,15)
             this.components.addComponent(ghostSecret, new DataPeople("secretGhost", "Secret",18))
+            pnjs.add(ghostSecret)
         }
         
         this.components.addComponent(this.character2, new DialogBox (this.character2))

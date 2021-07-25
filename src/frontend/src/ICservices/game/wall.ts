@@ -9,6 +9,8 @@ import { showInputTextWithMessage } from "../../scenes/UI/InputTextWithMessage";
 import showMessage from "../../scenes/UI/Message";
 
 
+import { showDefault } from "../../scenes/UI/Defaults";
+
 const agentOptions = {
     host: "http://localhost:8000" 
 }
@@ -19,7 +21,7 @@ console.log(wall)
 function playWithWall(scene : Phaser.Scene) {
 
   
-
+//    const btnOk = window.document.querySelector('.btnOk') as HTMLButtonElement
    const titleZone = window.document.querySelector('#titleZone') as HTMLTitleElement
    titleZone.style.display = "block"
    titleZone.innerText = "The Wall 🪧"
@@ -32,7 +34,7 @@ function playWithWall(scene : Phaser.Scene) {
        
        console.log("No")
        yesNo.style.display = 'none'
-       return;
+       
    }
 
    function handleYes() {
@@ -55,8 +57,9 @@ function playWithWall(scene : Phaser.Scene) {
                alert("You must enter a message!")
            }
            else {
-               const message = inputText.value
+               const message = inputText.value.substr(0,999) //Limit of the wall
                showInputTextWithMessage("Sign with your pseudo")
+               const btnOk = window.document.querySelector('.btnOk') as HTMLButtonElement
                btnOk.removeEventListener('click', submitMessage)
 
                 const submitPseudo = () => {
@@ -66,9 +69,18 @@ function playWithWall(scene : Phaser.Scene) {
                     }
                     else {
                         btnOk.removeEventListener('click', submitPseudo)
-                        const pseudo = inputText.value
+                        const pseudo = inputText.value.substr(0,30) //To avoid too long pseudos..
                         wall.addMessage(pseudo, message)
-                        showMessage("Thanks for making history, you can check your message here")
+                        showMessage("Thanks for making history, you can check your message on The Wall (section About) ")
+                        const msg = window.document.querySelector('#titleZone') as HTMLElement
+                        let newBtn = window.document.createElement('button')
+                        msg.appendChild(newBtn)
+                        newBtn.addEventListener('click', () => {
+                            newBtn.style.display = 'none'
+                            showDefault()
+                        })
+                        btnOk.style.display = "block"
+                        btnOk.addEventListener('click', showDefault)
                         scene.game.input.keyboard.addCapture(32)
                         scene.game.input.keyboard.startListeners()
                     }
