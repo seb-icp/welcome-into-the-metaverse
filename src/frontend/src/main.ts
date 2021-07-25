@@ -5,9 +5,6 @@ import City from "./scenes/City"
 import Preloader from "./scenes/Preloader";
 import School from "./scenes/School";
 
-//Plugin
-
-import {Plugin as NineSlicePlugin} from 'phaser3-nineslice'
 
 const config =  {
   type: Phaser.AUTO,
@@ -23,9 +20,6 @@ const config =  {
           gravity : {y : 0},
           debug : false
       }
-  },
-  plugins : {
-      global : [NineSlicePlugin.DefaultCfg],
   },
   scene : [Preloader,School,City],
   scale : {

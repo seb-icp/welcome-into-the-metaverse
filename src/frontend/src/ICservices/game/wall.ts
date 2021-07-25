@@ -6,8 +6,7 @@ import {idlFactory as wall_idl , canisterId as wall_id} from "../wall/counter"
 
 const agent = new HttpAgent();
 const wall = Actor.createActor(wall_idl, {agent , canisterId : wall_id})
-
-
+console.log(wall)
 
 function playWithWall() {
 
@@ -23,8 +22,15 @@ function playWithWall() {
 
    function handleYes() {
        console.log('Yes')
+       btnYes.removeEventListener('click', handleYes)
+       btnNo.removeEventListener('click', handleNo)
        showInputText()
-       
+       const submitMessage = () => {
+           const inputText = window.document.querySelector("textarea")
+           console.log(inputText?.value)
+       }
+       const okBtn = window.document.addEventListener('click', submitMessage)
+
        return;
    }
 

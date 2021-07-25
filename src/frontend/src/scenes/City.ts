@@ -22,7 +22,7 @@ export default class City extends Phaser.Scene {
     private dialogBox : DialogBox | undefined
 
     private characters : Phaser.Physics.Arcade.Sprite[] = []
-    private otherCamera! : Phaser.Cameras.Scene2D.Camera
+   
 
     
     constructor() {
