@@ -57,6 +57,8 @@ export default class School extends Phaser.Scene {
         const ghost2 = this.physics.add.sprite(190,390,'ghostFalseSchool', 0)
         const ghost3 = this.physics.add.sprite(210,390,'ghostFalseSchool', 0)
         const ghost4 = this.physics.add.sprite(230,390,'ghostFalseSchool', 0)
+        const ghost5 = this.physics.add.sprite(160,10,'ghostFalseSchool',0)
+        const ghost6 = this.physics.add.sprite(120,70,'ghostFalseSchool',0)
         
 
 
@@ -65,7 +67,8 @@ export default class School extends Phaser.Scene {
 
         const tileset1 = map.addTilesetImage('0_All_reading', 'tiles1')
         const tileset2 = map.addTilesetImage('5_Classroom_and_library_16x16', 'tiles2')
-        //tileset 3 and 4 deleted not usefull anymore : flemme de changer les indices
+        // const tileset3 = map.addTilesetImage('Adam_16x16' ,'tiles3')
+        const tileset4 = map.addTilesetImage('Bob_16x16', 'tiles4')
         const tileset5 = map.addTilesetImage('Interiors_16x16', 'tiles5')
         const tileset6 = map.addTilesetImage('Room_Builder_borders_16x16', 'tiles6')
         const tileset7 = map.addTilesetImage('Room_Builder_Floors_16x16', 'tiles7')
@@ -87,11 +90,12 @@ export default class School extends Phaser.Scene {
         this.layers.push(map.createLayer('objet2bis', tileset2))
         this.layers.push(map.createLayer('objet3', tileset5))
         this.layers.push(map.createLayer('objet3bis', tileset2))
+        this.layers.push(map.createLayer('character class3', tileset4))
         this.layers.push(map.createLayer('objet4', tileset2))
        
         
         //
-        this.character2 = this.physics.add.sprite(300,250, 'character2')
+        this.character2 = this.physics.add.sprite(150,100, 'character2')
         this.character2.body.setSize(this.character2.width - 5,15,true)
         this.character2.body.offset.y = 15;
         this.character2.setCollideWorldBounds(true); //Prevent the character from moving out of the screen 
@@ -112,12 +116,12 @@ export default class School extends Phaser.Scene {
 
       
 
-        this.characters = [teacher, girl, boyComputer, girlComputer, boyBar, girlSit, ghost, ghost2,ghost3,ghost4,board, computer1, computer2, books1, books2, locker1, locker2, poolTable, wall]
+        this.characters = [teacher, girl, boyComputer, girlComputer, boyBar, girlSit, ghost, ghost2,ghost3,ghost4, ghost5, ghost6, board, computer1, computer2, books1, books2, locker1, locker2, poolTable, wall]
       
         this.characters.forEach(character => {
             character.body.setSize(16 , 25, true)
             character.body.offset.y = 5
-            if (!(character === ghost || ghost2 || ghost3 || ghost4)) {
+            if (!(character === ghost || ghost2 || ghost3 || ghost4 || ghost5)) {
                 this.physics.add.collider(this.character2, character)
             }
             
@@ -138,7 +142,7 @@ export default class School extends Phaser.Scene {
         const randomForGuyComputer : string[] = ["I'm hard at work building Sudograph..check out beta 0.3.0 already! Oh and don't forget to listen to Demergence! 🎧", "Bonjour! I'm building Aedile, a management project that I'll help you collaborate and build other projects on the Internet Computer! 🛠", "I'm building Stoic Wallet and Rise of The Magni, check out our lab : Toniq Labs! 🧪" , "I'm building Fleek and I'm plugging in the metaverse 🔌", "Hey, I'm building DSCVR, you're favorite Internet Computer application! Hmm what do you think about Hackathon #2? 💭 ", "Hello I'm Kyle Peacock, I'm recording an awesome tutorial serie and.... 0.80 is out! 📹", "Hello it's me Nico, I love Web 3.0, governance but above all I love when my code compiled and there is no error. ✨" , "Welcome to the Dfinity Developer community, my name is Igor,I can help you if you need any assistance here! 👨🏻‍🏫 " , "Hello! I'm Bob and I write a ton of stuff to explain how the Internet Computer works, check out my guide somewhere in the building! 📚"]
         const randomForComputer  : string [] =  ["List your canisters on Canlista!", "Join the Dfinity Dev Discord and be there on Friday : 12 PM PT / 3 PM ET / 9 PM CET / 7 PM UTC ... not 6PM UTC!" , "Join the ICP maximalist network and becomes an ambassador!" , "Claim your cycles!" , "Join the ICP squad and becomes a contributor!", "Get started at dfinity.org/developers/ "]
         const randomForGirl : string [] = ["I'm playing Saga tarot, do you want your fortune to be told? 🔮 \n * More infos at : l2jyf-nqaaa-aaaah-qadha-cai. raw.ic0.app *" , "I'm playing FudBuster, who said there is no ressource to learn here? 📚 \n * More infos at https://zxkrk-xyaaa-aaaad-qad5q-cai.ic.fleek.co/ *", "I'm playing at Rise of the Magni, show me your strategy! 🧠 \n * More infos at https://riseofthemagni.com/ *", "I'm playing Motoko Runner, I love this game! Did you know that I've installed it on one of our computer here? 👨‍💻" , "I'm playing at Fly Aves! Daaaaaamn this is hard  \n * More infos at https://bjv3y-niaaa-aaaah-aadsq-cai.ic0.app/ *"]
-        // const randomForTelevision : string[] = ["ICP-NEWS The Internet Computer Reporter 📺" , "BREAKING NEWS - Dominic Williams just announced Ethereum and IC intereropability through Chain Key Cryptography 🔑" , "Mercury Launch Event 🎤 - Announcing the Internet Computer Mainnet and a 20 year Roadmap!" , "BREAKING NEWS - There is no trace of COVID 🦠 in the metaverse 🙌" , "BREAKING NEWS - The Internet Computer blockchain recently surpassed 100MM blocks 💯 of Friday, July 23, 2021 09:15:28 AM"]
+        const randomForTelevision : string[] = ["ICP-NEWS The Internet Computer Reporter 📺" , "BREAKING NEWS - Dominic Williams just announced Ethereum and IC intereropability through Chain Key Cryptography 🔑" , "Mercury Launch Event 🎤 - Announcing the Internet Computer Mainnet and a 20 year Roadmap!" , "BREAKING NEWS - There is no trace of COVID 🦠 in the metaverse 🙌" , "BREAKING NEWS - The Internet Computer blockchain recently surpassed 100MM blocks 💯 of Friday, July 23, 2021 09:15:28 AM"]
 
         function getARandomMessage (array : string []) {
             let l = array.length
@@ -159,7 +163,7 @@ export default class School extends Phaser.Scene {
         const messageD = getARandomMessage(randomForGirl)
         console.log(messageD)
 
-        // const messageE = getARandomMessage(randomForTelevision)
+        const messageE = getARandomMessage(randomForTelevision)
     
 
         this.components.addComponent(teacher , new DataPeople("teacher", "Welcome to the Motoko School, my name is Steve, Ill be your teacher for day! Take a seat and start a quizz" , 18))
@@ -173,13 +177,16 @@ export default class School extends Phaser.Scene {
         this.components.addComponent(ghost2, new DataPeople ("ghost2", "I'm a ghost in the shell, will you catch me?", 18))
         this.components.addComponent(ghost3, new DataPeople ("ghost3", "I'm a ghost in the shell, will you catch me?", 18))
         this.components.addComponent(ghost4, new DataPeople ("ghost4", "I'm a ghost in the shell, will you catch me?", 18))
+        this.components.addComponent(ghost5, new DataPeople ("item", messageE , 18))
+        this.components.addComponent(ghost6, new DataPeople('item',"Shhhh.. I'm trying to concentrate.", 18 ))
+        
 
         this.components.addComponent(board, new DataPeople  ("item", 'There are currently 214 nodes around the world that powers the Interner Computer 🌍  \n \n* More infos on ic.rocks🧊 *',18))
         this.components.addComponent(computer1, new DataPeople  ("item", messageC ,18))
         this.components.addComponent(computer2, new DataPeople  ("gameInTheGame", 'd' ,18))
         this.components.addComponent(books1, new DataPeople  ("item", 'Non-interactive distributed key generation and key resharing. March 13,2021. Jens Groth. \n \n *Woah I have no idea what this means*',18))
         this.components.addComponent(books2, new DataPeople  ("item", 'The ICP guide - The ultimate guide to everything related to the Internet Computer Protocol.📚  \n \n *More infos on icp.guide *',18))
-        this.components.addComponent(locker1, new DataPeople  ("item", '*This locker is locked for 8 years* 🔐 ',18))
+        this.components.addComponent(locker1, new DataPeople  ("locker", '*This locker is locked for 8 years* 🔐 ',18))
         this.components.addComponent(locker2, new DataPeople  ("item", 'There seems to be 1 ICP inside this locker... how can I open this? 🤔 \n \n',18))
         this.components.addComponent(poolTable, new DataPeople  ("item", 'd ',18))
         this.components.addComponent(wall, new DataPeople  ("wall", 'Should I try to write on this wall ?',18))

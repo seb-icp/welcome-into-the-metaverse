@@ -11,6 +11,8 @@ import DataPeople from "../components/DataPeople";
 import DialogBox from "../components/DialogBox";
 // import GameInTheGame from "./GameInTheGame";
 
+
+
 export default class City extends Phaser.Scene {
 
    
@@ -44,8 +46,11 @@ export default class City extends Phaser.Scene {
 
     create() {
         console.log("City creation")
+        //@ts-ignore
+        console.log(window.ghostInSchool)
 
         const ghost = this.physics.add.sprite(235,95,'ghostFalseCity',0)
+        
         this.cameras.main.fadeIn(1000, 0, 0, 0)
         
         
@@ -166,6 +171,13 @@ export default class City extends Phaser.Scene {
         pnjs.add(this.santa)
         pnjs.add(ghost)
     
+        //Secret ghost
+        //@ts-ignore
+        if (window.ghostInSchool === true) {
+            var ghostSecret = this.physics.add.sprite(0,150,'ghostFalseCity',0)
+            ghostSecret.body.setSize(15,15)
+            this.components.addComponent(ghostSecret, new DataPeople("secretGhost", "Secret",18))
+        }
         
         this.components.addComponent(this.character2, new DialogBox (this.character2))
         this.dialogBox = this.components.findComponent(this.character2, DialogBox)
@@ -175,6 +187,7 @@ export default class City extends Phaser.Scene {
         
         this.components.addComponent(this.santa , new DataPeople("santa", 'hohoho!' , 18)) //We need to add a Data component if we want to interact with Santa because the Selection Cursor uses it ...
         this.components.addComponent(ghost, new DataPeople  ("ghostCity", 'Enter the school',18)) 
+       
        
 
         //Add colliders 
@@ -223,8 +236,6 @@ export default class City extends Phaser.Scene {
        
 }
        
-
-    
 
 
     update (_t : number, dt:number) {

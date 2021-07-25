@@ -21,6 +21,7 @@ export default class SelectionCursor implements IComponent {
 
     private sceneName : string //Temporary solution
     private securityScene : 0 | 1 //Solution for multiples scenes creation
+   
   
 
     constructor(cursors : Phaser.Types.Input.Keyboard.CursorKeys, pnjs : Phaser.Physics.Arcade.StaticGroup, character : Phaser.GameObjects.GameObject , distance = 8, sceneName :string) {
@@ -30,6 +31,7 @@ export default class SelectionCursor implements IComponent {
         this.character = character
         this.sceneName = sceneName
         this.securityScene = 0
+        
     }
 
     init(go : Phaser.GameObjects.GameObject, components : IComponentsService) {
@@ -96,7 +98,13 @@ export default class SelectionCursor implements IComponent {
         if (this.sceneName === 'city') {
                 text = `Hello my name is ${data.name}! ${data.message}`
             if (data.name === 'santa') {
-                text = "Do you want some ICP ?"
+                let date = new Date()
+                let year = date.getFullYear()
+                if (year === 2029) {
+                    text = "Oh Oh Oh it's the day 🎁 : 235655551"
+                } else {
+                    text = "Do you want some ICP ?"
+                }
             }
             if (data.name === 'ghostCity') {
                 const {scene} = this.gameObject
@@ -121,12 +129,24 @@ export default class SelectionCursor implements IComponent {
                 this.dialog!.setText(text, true)
                 return;
             }
+            if (data.name === 'locker') {
+                const date = new Date()
+                const year = date.getFullYear()
+                if (year >= 2029) {
+                    text = "Oh! There is a paper : 195678910"
+                } else {
+                    text = `${data.message}`
+                }
+            }
 
             if (data.name === 'ghost') {
                 text = `${data.message}`
                 this.dialog!._toggleWindow() 
                 this.dialog!.setText(text, true)
                 pnj.destroy()
+                
+                //@ts-ignore
+                window.ghostInSchool = true
                 return;
             }
 
@@ -145,8 +165,6 @@ export default class SelectionCursor implements IComponent {
                 return;
             }
             if (data.name === 'wall') {
-
-    
                 const {scene} = this.gameObject
                 console.log('Wall')
                 text = `${data.message}`
@@ -162,7 +180,6 @@ export default class SelectionCursor implements IComponent {
                 text = data.message
             }
             if (data.name === 'gameInTheGame') {
-
 
                 //Add some dialog to let choice
 

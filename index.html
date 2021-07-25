@@ -7,6 +7,7 @@
   <title>Metaverse</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
     html,
     body {
       height: 100%;
@@ -29,9 +30,12 @@
 
 
     iframe {
+      position: absolute;
       width: 340px;
       height: 640px;
       border: 2px solid;
+      top: 50px;
+      left: 190px;
       border-radius: 15px;
       padding: 10px;
       background-color: black;
@@ -99,6 +103,7 @@
       margin-bottom: 10px;
       padding: 8px;
     }
+
     .questSpecial {
       background-color: rgba(138, 49, 118, 0.7);
       border-radius: 10px;
@@ -132,7 +137,7 @@
       border: 1px slategrey;
       display: flex;
       flex-direction: column;
-    
+
 
     }
 
@@ -165,10 +170,10 @@
     button:active {
       box-shadow: 0 5px #666;
       transform: scale(0.9);
-      
+
     }
-  
-  
+
+
     .zoneQuests {
       display: none;
     }
@@ -185,16 +190,17 @@
       font-weight: 800;
       color: black;
       padding: 25px;
-      border : 1px solid grey;
-      margin-top:25px ;
-      
+      border: 1px solid grey;
+      margin-top: 25px;
+
     }
 
     .aboutProject {
       color: gray;
       text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
+
     .service {
       background-color: rgba(150, 150, 131, 0.493);
       border-radius: 10px;
@@ -204,10 +210,12 @@
       padding: 8px;
       color: gray;
     }
+
     .reference {
       color: gray;
-      padding-top : 20px;
+      padding-top: 20px;
     }
+
     .gameInfo {
       margin-bottom: 25px;
       padding: 10px;
@@ -217,33 +225,38 @@
       color: gray;
       text-align: center;
     }
+
     .yesNo {
-      margin:150px;
+      margin: 150px;
       display: none;
     }
 
-    textarea{
+    textarea {
       resize: none;
       font-size: 18px;
     }
+
     .inputText {
       display: none;
       flex-direction: column;
-      width : 100%;
+      width: 100%;
       margin-top: 100px;
     }
+
     .btnOk {
       width: 25%;
       margin: 15px auto;
     }
+
     .default {
       text-align: center;
-      color : grey;
+      color: grey;
       font-size: 50px;
       margin-top: 210px;
       font-weight: 800;
-      font-family: Indie Flower,ui-sans-serif,system-ui ;
+      font-family: Indie Flower, ui-sans-serif, system-ui;
     }
+
     #titleZone {
       margin-top: 25px;
       padding: 5px;
@@ -253,14 +266,22 @@
       text-align: center;
       margin: 0 auto;
       border-radius: 5px;
-      display: none;  
+      display: none;
     }
+    a{
+      text-decoration: none;
+      color : rgb(85,26,139)
   
-    
-    
+    }
+    a:hover {
+      cursor: pointer;
+    }
+    a:visited {
+      color : grey
+    }
+
   </style>
 </head>
-
 <body>
   <div class="organization">
     <div id="game"></div>
@@ -273,24 +294,24 @@
         <div><button class="btnCredits"> Credits 🌍</button></div>
       </div>
       <div class="zone">
-        
+
         <div class="zoneGame">
           <h1 class="gameInfo">Keep this section while playing the game</h1>
           <h1 class="gameInfo"> Arrows to move / Spacebar to interact </h1>
           <h2 id='titleZone'> The Wall//- </h2>
-            <div class="yesNo">
-             <button class="btnYes"> Yes </button>
+          <div class="yesNo">
+            <button class="btnYes"> Yes </button>
             <button class="btnNo"> No</button>
           </div>
           <div class="inputText">
-              <textarea name="message" id="message" cols="50" rows="10" placeholder="Write here" ></textarea>
-              <button class="btnOk"> Ok </button>
-          </div> 
-           <div class="quizz"></div> 
-           <div class="default">
+            <textarea name="message" id="message" cols="50" rows="10" placeholder="Write here"></textarea>
+            <button class="btnOk"> Ok </button>
+          </div>
+          <div class="quizz"></div>
+          <div class="default">
             The metaverse is metacool
-          </div> 
-          
+          </div>
+
         </div>
         <div class="zoneQuests">
           <div class="quest-wrap">
@@ -303,7 +324,7 @@
             <div class="questSpecial"> Open the locker... 🪄 </div>
           </div>
           <div class="specialQuest">
-            Open the locker is a special mission taking place in the Internet Computer right now. 
+            Open the locker is a special mission taking place in the Internet Computer right now.
             <br><br>
             Contrary to all other missions, here there will be only one hero.
           </div>
@@ -311,18 +332,25 @@
         <div class="zoneAbout">
           <div class="about-wrap">
             <h1 class="aboutProject"> About this project </h1>
-            <div class="aboutProject"> 
-              This game was made during the first Internet Computer hackathon. This hackathon was organized by DSCVR and it's founder Rick Porter in July 2021. <br> <br>
-              My goal was to experiment as much as possible with the possibilities of the network, while playing you can directly interact with services living on the Internet Computer.
+            <div class="aboutProject">
+              This game was made during the first Internet Computer hackathon. This hackathon was organized by DSCVR
+              and it's founder Rick Porter in July 2021. <br> <br>
+              My goal was to experiment as much as possible with the possibilities of the network, while playing you
+              can directly interact with services living on the Internet Computer.
               <br><br>
               Here's a list of the services connected to this game :
             </div>
-            <div class="service"> Create your character and meet yourself directly in the game.</div>
-            <div class="service"> Write on The Wall and mark the history.  </div>
-            <div class="service"> Open the locker and become a hero.  </div>
-            <div class="service"> Join the Motoko School and learn together* </div>
-            <div class="reference"> This game is also an hommage to this early community and all those people building and experimenting day after day. <br> <br>
-              If you've been around during the past few months there is probably a reference to you or your project. <br> <br> If not I'm sorry, we are already so many! But you can still create your character and join the Metaverse... see you there. </div>
+            <div class="service"> <a href="https://hpjzf-uqaaa-aaaah-aaezq-cai.ic0.app/" target="_blank"> Create your character and meet yourself and the community in the game 🧙 </a> </div>
+            <div class="service"> <a href="https://qvf2m-pyaaa-aaaah-aahga-cai.ic0.app/" target="_blank"> Write on The Wall and mark the history. ✨ </a> </div>
+            <div class="service"> <a href="https://afmdo-tiaaa-aaaah-aaiea-cai.ic0.app/" target="_blank"> Open the locker and become a hero forever. 🦸‍♀️ </a> </div>
+            <div class="service"> <a href="https://cieun-eiaaa-aaaad-qak6a-cai.raw.ic0.app/" target="_blank"> Drive your Motoko like a pro by Lucas Monteiro  🏁 </a> </div>
+            <div class="service"> Join the Motoko School and learn together (To come!) </div>
+            <div class="reference"> This game is also an hommage to this early community and to all the people building
+              and experimenting day after day. <br> <br>
+              If you've been around during the past few months there is probably a reference to you or some project related to you.
+              <br> <br> If not I'm sorry, we are already so many! But you can still create your character and join the
+              Metaverse... see you there. 🔌
+            </div>
           </div>
         </div>
         <div class="zoneCredits">
@@ -331,7 +359,7 @@
         </div>
       </div>
     </div>
-</div>
+  </div>
   <script type="module" src="/src/frontend/src/basic.ts"></script>
   <script type="module" src="/src/frontend/src/main.ts"></script>
 </body>
