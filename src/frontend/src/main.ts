@@ -9,9 +9,9 @@ import School from "./scenes/School";
 window.ghostInSchool = false
 
 const config =  {
-  type: Phaser.AUTO,
-  width: 400,
-  height : 400,
+  type: Phaser.CANVAS,
+  width: 600,
+  height : 600,
   parent : 'game', //ID of the HTML container
   dom : {
       createContainer : true

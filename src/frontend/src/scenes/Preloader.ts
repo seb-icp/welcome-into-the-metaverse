@@ -67,6 +67,7 @@ export default class Preloader extends Phaser.Scene {
             this.game.cache.addCustom('customCache'); //Creates a new custom cache for storing any type of data I want
             this.game.cache.custom.customCache.add('characters', data) 
          }).then( () => this.scene.start('city'))
+     
         
     }
 }
