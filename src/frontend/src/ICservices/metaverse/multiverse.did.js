@@ -13,6 +13,11 @@ export default ({ IDL }) => {
         [IDL.Vec(IDL.Tuple(IDL.Principal, Character))],
         [],
       ),
+    'getAllCharactersInsecure' : IDL.Func (
+      [],
+      [IDL.Vec(IDL.Tuple(IDL.Principal, Character))],
+      ['query']
+    ),
     'numberOfCharacter' : IDL.Func([], [IDL.Nat], []),
   });
 };

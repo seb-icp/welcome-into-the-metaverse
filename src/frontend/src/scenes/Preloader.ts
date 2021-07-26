@@ -1,5 +1,5 @@
 import Phaser from "phaser"
-// import { getData } from "../data"
+import { getData } from "../ICservices/game/data"
 
 export default class Preloader extends Phaser.Scene {
 
@@ -7,7 +7,9 @@ export default class Preloader extends Phaser.Scene {
         super('prepeloader')
     }
     preload() {
-        this.add.text(200,200,"Game is loading...")
+        this.add.text(100,100,"Transfering your brain.... ")
+        this.load.audio('schoolSong', './audio/POL.mp3')
+        this.load.audio('inTheCity', './audio/in-the-city.mp3')
 
         //Special characters :
         this.load.spritesheet('santa', './character/santa.png', {frameWidth:48, frameHeight : 32})
@@ -54,29 +56,17 @@ export default class Preloader extends Phaser.Scene {
         this.load.image('tiles8' , './tileset/Room_Builder_Walls_16x16.png')
         this.load.tilemapTiledJSON('school', './tileset/school.json')
   
-          
-        //Load audio
-  
-        this.load.audio('inTheCity', './audio/in-the-city.mp3')
-        this.load.audio('schoolSong', './audio/mahali-pazuri.mp3')
 
-        //For the UI
-
-        this.load.image('smallbutton' ,'./ui/grey_box.png')
-        this.load.image('gear' ,'./ui/gear.png')
-        this.load.image('checkmark' ,'./ui/green_checkmark.png')
-        this.load.image('quest' ,'./ui/quest.png')
-        this.load.image('ui-panel', './ui/grey_panel.png')
     }
 
     create() {
 
-        // getData().then( (data) => {
+        getData().then( (data) => {
             
-        //     console.log(data)
-        //     this.game.cache.addCustom('customCache'); //Creates a new custom cache for storing any type of data I want
-        //     this.game.cache.custom.customCache.add('characters', data) 
-        //  }).then( () => this.scene.start('preloader'))
-        this.scene.start('city')
+          
+            this.game.cache.addCustom('customCache'); //Creates a new custom cache for storing any type of data I want
+            this.game.cache.custom.customCache.add('characters', data) 
+         }).then( () => this.scene.start('city'))
+        
     }
 }

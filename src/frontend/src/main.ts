@@ -20,7 +20,7 @@ const config =  {
       default: 'arcade',
       arcade : {
           gravity : {y : 0},
-          debug : false
+          debug : false,
       }
   },
   scene : [Preloader,School,City],
@@ -68,7 +68,7 @@ btnCredits.addEventListener('click', (_e) => {
     zoneAbout.style.display = 'none'
     zoneQuests.style.display = 'none'
     zoneCredits.style.display = 'none'
-    zoneCredits.style.display = 'block'
+    zoneCredits.style.display = 'flex'
 })
 
 export default new Phaser.Game(config)

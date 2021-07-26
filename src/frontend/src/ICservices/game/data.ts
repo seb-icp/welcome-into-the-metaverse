@@ -18,8 +18,8 @@ let data: Array<[Principal,Character]>;
 
 
 const getData = async () =>  {
-    data = await multi.getAllCharacters() as Array<[Principal,Character]>
-    
+    data = await multi.getAllCharactersInsecure() as Array<[Principal,Character]>
+    console.log('here')
     const numberOfPeople = data.length
 
     const randomInts = (quantity : number, max : number) => {

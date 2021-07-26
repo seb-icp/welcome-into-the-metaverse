@@ -45,9 +45,9 @@ export default class City extends Phaser.Scene {
     }
 
     create() {
-        console.log("City creation")
+        
         //@ts-ignore
-        console.log(window.ghostInSchool)
+    
 
         const ghost = this.physics.add.sprite(235,95,'ghostFalseSchool',0)
         
@@ -68,63 +68,11 @@ export default class City extends Phaser.Scene {
         //Add sprite to characters
 
 
-        this.character2 = this.physics.add.sprite(100,100, 'character2')
+        this.character2 = this.physics.add.sprite(228,118, 'character2')
        
-                
-        let peoples = [
-            {
-                "name": "dukes",
-                "message": "Hello. I am dukes. I am hungry. Where can I find some chips and guac in this Dfinity Metaverse? ",
-                "avatarNumber": 2
-            },
-            {
-                "name": "First10digits",
-                "message": "Follow me!",
-                "avatarNumber": 10
-            },
-            {
-                "name": "Howellikeawolf",
-                "message": "Do I really have to?",
-                "avatarNumber": 6
-            },
-            {
-                "name": "whizwang",
-                "message": "Roses are red, chai is tea, learn Motoko and build on the IC!",
-                "avatarNumber": 4
-            },
-            {
-                "name": "The Bob Blob",
-                "message": "Blub... Blurb... Blooooob...",
-                "avatarNumber": 10
-            },
-            {
-                "name": "lastmjs",
-                "message": "Greetings from the digital world",
-                "avatarNumber": 4
-            },
-            {
-                "name": "Chamfa",
-                "message": "Pairplay",
-                "avatarNumber": 10
-            },
-            {
-                "name": "Hazel",
-                "message": "Woah!",
-                "avatarNumber": 10
-            },
-            {
-                "name": "Jumbo",
-                "message": "The might Jumbo\nUndefeated ",
-                "avatarNumber": 9
-            },
-            {
-                "name": "Jingo McMuffin",
-                "message": "Felonious greetings from the ninth realm of Covfefed",
-                "avatarNumber": 1
-            }
-        ]
 
-        // let peoples = this.game.cache.custom.customCache.get('characters') as DataPeople[]
+
+        let peoples = this.game.cache.custom.customCache.get('characters') as DataPeople[]
         const randomPosition : [x : number , y : number][] = [[320,100],[300,250],[200,228],[150,50],[150,280],[20,64],[180,350],[170,130],[320,30],[391,360]]
  
 
@@ -173,7 +121,7 @@ export default class City extends Phaser.Scene {
     
         //Secret ghost
         //@ts-ignore
-        if (window.ghostInSchool === true) {
+        if (!window.ghostInSchool === false) {
             var ghostSecret = this.physics.add.sprite(0,150,'ghostFalseSchool',0)
             ghostSecret.alpha = 0
             ghostSecret.body.setSize(15,15)
@@ -219,8 +167,8 @@ export default class City extends Phaser.Scene {
         //Sounds
        
         this.sound.stopAll()
-        // const backgroundSound = this.sound.add('inTheCity')
-        // backgroundSound.play()
+        const backgroundSound = this.sound.add('inTheCity')
+        backgroundSound.play()
         
         //Debug functionality
 

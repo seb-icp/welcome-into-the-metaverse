@@ -11,10 +11,8 @@ import showMessage from "../../scenes/UI/Message";
 
 import { showDefault } from "../../scenes/UI/Defaults";
 
-const agentOptions = {
-    host: "http://localhost:8000" 
-}
-const agent = new HttpAgent(agentOptions);
+
+const agent = new HttpAgent();
 const wall = Actor.createActor(wall_idl, {agent , canisterId : wall_id})
 console.log(wall)
 
@@ -58,7 +56,9 @@ function playWithWall(scene : Phaser.Scene) {
            }
            else {
                const message = inputText.value.substr(0,999) //Limit of the wall
-               showInputTextWithMessage("Sign with your pseudo")
+               showInputTextWithMessage("Sign your message!")
+               inputText.value =""
+               inputText.placeholder = "Pseudo"
                const btnOk = window.document.querySelector('.btnOk') as HTMLButtonElement
                btnOk.removeEventListener('click', submitMessage)
 
@@ -71,14 +71,7 @@ function playWithWall(scene : Phaser.Scene) {
                         btnOk.removeEventListener('click', submitPseudo)
                         const pseudo = inputText.value.substr(0,30) //To avoid too long pseudos..
                         wall.addMessage(pseudo, message)
-                        showMessage("Thanks for making history, you can check your message on The Wall (section About) ")
-                        const msg = window.document.querySelector('#titleZone') as HTMLElement
-                        let newBtn = window.document.createElement('button')
-                        msg.appendChild(newBtn)
-                        newBtn.addEventListener('click', () => {
-                            newBtn.style.display = 'none'
-                            showDefault()
-                        })
+                        showMessage("Is it me or it was more than just a simple blackboard...?")
                         btnOk.style.display = "block"
                         btnOk.addEventListener('click', showDefault)
                         scene.game.input.keyboard.addCapture(32)

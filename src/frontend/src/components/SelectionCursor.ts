@@ -102,13 +102,13 @@ export default class SelectionCursor implements IComponent {
                 let date = new Date()
                 let year = date.getFullYear()
                 if (year === 2029) {
-                    text = "Oh Oh Oh it's the day 🎁 : 235655551"
+                    text = "Oh Oh Oh it's the day 🎁 : 560210"
                 } else {
                     text = "Do you want some ICP ?"
                 }
             }
             if (data.name === "secretGhost") {
-                text = "Oh you found me! 👻 I can give you my secret : 0251158944"
+                text = "Oh you found me! 👻 I can give you my secret : 789023"
 
             }
             if (data.name === 'ghostCity') {
@@ -138,7 +138,11 @@ export default class SelectionCursor implements IComponent {
                 const date = new Date()
                 const year = date.getFullYear()
                 if (year >= 2029) {
-                    text = "Oh! There is a paper : 195678910"
+                    text = "Oh! There is a paper : 123459"
+                    this.dialog!._toggleWindow() 
+                    this.dialog!.setText(text, true)
+                    return;
+
                 } else {
                     text = `${data.message}`
                 }

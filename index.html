@@ -129,8 +129,9 @@
     }
 
     .UI {
-      height: 100%;
+   
       width: 100%;
+      max-width: 600px;
       background-color: whitesmoke;
       margin-left: 2px;
       padding: 25px;
@@ -182,6 +183,7 @@
 
     .zoneCredits {
       display: none;
+      flex-direction: column;
     }
 
     .specialQuest {
@@ -190,13 +192,11 @@
       padding: 25px;
       border: 1px solid grey;
       margin-top: 25px;
-
     }
 
     .aboutProject {
       color: gray;
       text-align: center;
-      margin-bottom: 20px;
     }
 
     .service {
@@ -204,7 +204,7 @@
       border-radius: 10px;
       text-align: justify;
       margin: 3px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       padding: 8px;
       color: gray;
     }
@@ -277,6 +277,24 @@
     a:visited {
       color : grey
     }
+    .credit {
+      background-color: rgba(150, 150, 131, 0.493);
+      border-radius: 10px;
+      text-align: justify;
+      margin: 5px;
+      margin-bottom: 18px;
+      padding: 20px;
+      color: gray;
+    }
+    .creditSpecial {
+      background-color: rgba(150, 150, 131, 0.493);
+      border-radius: 10px;
+      text-align: justify;
+      margin: 5px;
+      margin-bottom: 15px;
+      padding: 17px;
+      color: gray;
+    }
 
   </style>
 </head>
@@ -295,8 +313,8 @@
 
         <div class="zoneGame">
           <h1 class="gameInfo">Keep this section while playing the game</h1>
-          <h1 class="gameInfo"> Arrows to move / Spacebar to interact </h1>
-          <h2 id='titleZone'> The Wall//- </h2>
+          <h1 class="gameInfo"> Arrows to move / Space to interact </h1>
+          <h2 id='titleZone'> If you see that then it's a bug :D </h2>
           <div class="yesNo">
             <button class="btnYes"> Yes </button>
             <button class="btnNo"> No</button>
@@ -343,17 +361,23 @@
             <div class="service"> <a href="https://afmdo-tiaaa-aaaah-aaiea-cai.ic0.app/" target="_blank"> Open the locker and become a hero forever. 🦸‍♀️ </a> </div>
             <div class="service"> <a href="https://cieun-eiaaa-aaaad-qak6a-cai.raw.ic0.app/" target="_blank"> Drive your Motoko like a pro by Lucas Monteiro  🏁 </a> </div>
             <div class="service"> Join the Motoko School and learn together (To come!) </div>
-            <div class="reference"> This game is also an hommage to this early community and to all the people building
+            <div class="reference"> This game is also an hommage to this early community and all the people building
               and experimenting day after day. <br> <br>
-              If you've been around during the past few months there is probably a reference to you or some project related to you.
-              <br> <br> If not I'm sorry, we are already so many! But you can still create your character and join the
-              Metaverse... see you there. 🔌
+              If you've been around during the past few months there is probably a reference to you or some project related to you :)
+              <br> <br> If you feel forgotten, I'm sorry, we are already so many! <br> But this is no excuse, create your character and join us in the
+              Metaverse...! See you there. 🔌
             </div>
           </div>
         </div>
         <div class="zoneCredits">
-          Credits
-          <div> TO DO</div>
+          <h1 style="color: grey; text-align: center;"> Thanks </h1>
+            <div class="credit"> Audio 🎵 <br> Contains music ©2021 Joshua McLean (https://joshua-mclean.itch.io) <br>
+              Licensed under Creative Commons Attribution 4.0 International </div>
+            <div class="credit"> Sprites 👾 <br> Thanks to Lime Zu : <a href="https://ourcade.co/" target="_blank">https://limezu.itch.io/</a>  </div>
+            <div class="credit"> Framework 🛠: <br> This game was made using Motoko and Phaser/Typescript. <br>
+            A huge thanks to <a href="https://ourcade.co/" target="_blank"> Ourcade </a> and his tutorials who saved my life. </div>
+            <div class="credit"> Thanks to Lucas Monteiro who gave his permission to include <a href="https://h5aet-waaaa-aaaab-qaamq-cai.raw.ic0.app/post/110010/motoko-runner" target="_blank"> Motoko Runner </a> here! </div>
+            <div class="creditSpecial"> Creator : <a href="https://twitter.com/ThuillierSbast3" target=_blank style="color:rgb(85,26,139);"> Seb </a>if you've liked the game, detected a bug (highly probable!) or just want to talk, reach me!</div>
         </div>
       </div>
     </div>

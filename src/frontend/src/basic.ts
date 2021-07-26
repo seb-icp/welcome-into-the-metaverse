@@ -33,5 +33,5 @@ btnCredits.addEventListener('click', (_e) => {
     zoneAbout.style.display = 'none'
     zoneQuests.style.display = 'none'
     zoneGame.style.display = 'none'
-    zoneCredits.style.display = 'block'
+    zoneCredits.style.display = 'flex'
 })
